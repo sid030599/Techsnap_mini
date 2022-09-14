@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications Page</title>
+    <link rel="stylesheet" href="{% static "css/all.css"%}">
+    <link rel="stylesheet" href="{% static "css/notifications_page_style.css"%}">
+    <!----===== Boxicons CSS ===== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <header class="header">
+        <div class="left-header">
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+
+            <img id="logo" src="images/logo.png">
+        </div>
+
+        <div class="right-header">
+            <div class="all-apps-container">
+                <div class="right-header-icons">
+                    <img class="all-apps-icon icon" src="images/Apps.png">
+                </div>
+            </div>
+
+            <div class="notification-container">
+                <div class="right-header-icons">
+                    <img class="notify-icon icon" src="images/notification.png">
+                </div>
+                <div class="dropdown">
+                    <div class="notify_item">
+                        <div class="notify_img">
+                            <img src="images/User.png" alt="profile_pic" style="width: 50px">
+                        </div>
+                        <div class="notify_info">
+                            <p>You have submitted your assignment submission for<span>Assignment-1</span></p>
+                            <button class="notify-btn">Explore All</button>
+                        </div>
+                        <div class="notify_time">
+                            <p>2h</p>
+                            <h1>...</h1>
+                        </div>
+                    </div>
+                    <div class="notify_item">
+                        <div class="notify_img">
+                            <img src="images/User.png" alt="profile_pic" style="width: 50px">
+                        </div>
+                        <div class="notify_info">
+                            <p>You have submitted your assignment submission for<span>Assignment-1</span></p>
+                            <button class="notify-btn">Explore All</button>
+                        </div>
+                        <div class="notify_time">
+                            <p>2h</p>
+                            <h1>...</h1>
+                        </div>
+                    </div>
+                    <div class="notify_See_All">
+                        <button class="see-All">See All Notifications</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-container">
+                <div class="right-header-icons">
+                    <img class="profile-icon icon" src="images/User.png">
+                </div>
+                <div class="dropdown-content">
+                    <a href="#"><span><i class="fa-solid fa-gauge"></i>Dashboard</span></a>
+                    <a href="#"><span><i class="fa-solid fa-table"></i>Grades</span></a>
+                    <a href="#"><span><i class="fa-solid fa-comment"></i>Messages</span></a>
+                    <a href="#"><span><i class="fa-solid fa-wrench"></i>Preferences</span></a>
+                    <a href="#"><span><i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</span></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="content-container">
+        <nav class="sidebar close">
+            <header>
+                <i class='bx bx-chevron-right toggle'></i>
+            </header>
+
+            <div class="menu-bar">
+                <div class="menu">
+                    <ul class="menu-links">
+                        <li class="nav-link">
+                            <a href="index.html">
+                                <i class='bx bx-home-alt icon'></i>
+                                <span class="text nav-text">Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="all_courses_page.html">
+                                <i class='bx bx-bar-chart-alt-2 icon'></i>
+                                <span class="text nav-text">All courses</span>
+                            </a>
+
+
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="#">
+                                <i class='bx bx-bell icon'></i>
+                                <span class="text nav-text">Calender</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a class="active" href="#">
+                                <i class='bx bx-pie-chart-alt icon'></i>
+                                <span class="text nav-text">Notifications</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="#">
+                                <i class='bx bx-heart icon'></i>
+                                <span class="text nav-text">Your Files</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="#">
+                                <i class='bx bx-wallet icon'></i>
+                                <span class="text nav-text">Events</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="bottom-content">
+                    <li class="">
+                        <a href="#">
+                            <i class='bx bx-log-out icon'></i>
+                            <span class="text nav-text">Logout</span>
+                        </a>
+                    </li>
+
+                    <li class="mode">
+                        <div class="sun-moon">
+                            <i class='bx bx-moon icon moon'></i>
+                            <i class='bx bx-sun icon sun'></i>
+                        </div>
+                        <span class="mode-text text">Dark mode</span>
+
+                        <div class="toggle-switch">
+                            <span class="switch"></span>
+                        </div>
+                    </li>
+
+                </div>
+            </div>
+        </nav>
+
+        <section class="home">
+            <div class="notifications-container">
+                <div class="banner banner-msg-type">
+                    <div class="row-1">
+                        <h1>Academic Calender - JUL - AUG 2021 Session</h1>
+
+                        <p>Posted by Krishna
+                            &#x2022;
+                            <span><i class="fa-solid fa-globe"></i></span>
+                            Global
+                            &#x2022;
+                            <span><i class="fa-solid fa-clock-rotate-left"></i></span>
+                            Edited
+                            &#x2022;
+                            <span><i class="fa-solid fa-sitemap"></i></span>
+                            Confidentially Released
+                        </p>
+                    </div>
+
+                    <div class="row-2">
+                        <p>Dear Student</p>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste non architecto ipsa praesentium ducimus excepturi delectus, hic eveniet, autem labore nulla consequuntur fugiat repellendus sit, dolorum adipisci facilis enim? Porro odit illo sequi vero officiis aliquam, quasi tenetur, repellat fugiat quia, pariatur minima laborum! Magni doloremque tempore blanditiis? Sapiente, libero!</p>
+                    </div>
+
+                    <div class="row-3">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        <i class="fa-solid fa-share-nodes"></i>
+                        <button class="btn-subscribe">Subscribe</button>
+                    </div>
+                </div>
+                
+                <div class="banner banner-img-type">
+                    <div class="row-1">
+                        <h1>Welcome to Online TechSnap !</h1>
+
+                        <p>Posted by Krishna
+                            &#x2022;
+                            <span><i class="fa-solid fa-globe"></i></span>
+                            Global
+                            &#x2022;
+                            <span><i class="fa-solid fa-clock-rotate-left"></i></span>
+                            Edited
+                            &#x2022;
+                            <span><i class="fa-solid fa-sitemap"></i></span>
+                            Confidentially Released
+                        </p>
+                    </div>
+
+                    <div class="row-2">
+                        <img src="images/tech-img-1.jpg">
+                    </div>
+
+                    <div class="row-3">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        <i class="fa-solid fa-share-nodes"></i>
+                        <button class="btn-subscribe">Subscribe</button>
+                    </div>
+                </div>
+
+                <div class="banner banner-msg-type">
+                    <div class="row-1">
+                        <h1>New Updates About College</h1>
+
+                        <p>Posted by Krishna
+                            &#x2022;
+                            <span><i class="fa-solid fa-globe"></i></span>
+                            Global
+                            &#x2022;
+                            <span><i class="fa-solid fa-clock-rotate-left"></i></span>
+                            Edited
+                            &#x2022;
+                            <span><i class="fa-solid fa-sitemap"></i></span>
+                            Confidentially Released
+                        </p>
+                    </div>
+
+                    <div class="row-2">
+                        <p>Hello Everyone!!</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim beatae pariatur perferendis! Vitae voluptates quod, commodi sunt rem cumque quas, deleniti cum asperiores perspiciatis neque dolorum modi? Ducimus fuga dolorem id! Explicabo provident, minima modi ad eum id nulla doloremque consequuntur quibusdam. Delectus minus nostrum dolores quis, iste saepe dicta unde. Porro suscipit expedita nobis perspiciatis. Fugit doloremque asperiores deserunt praesentium laboriosam omnis cupiditate quia sit quaerat atque sint quo hic aliquam quod obcaecati exercitationem, nihil aspernatur? Placeat, amet repellat id, soluta corporis pariatur inventore aliquid mollitia vero libero quas. Consequuntur quasi fuga dicta! Explicabo, deserunt? Similique impedit sit placeat quia? Dolor voluptatibus, dolores, quaerat dolorum labore eius et nostrum similique obcaecati veritatis debitis veniam autem ipsam, omnis voluptatem minima possimus voluptas? Amet magnam enim mollitia quam nisi accusamus voluptate atque, repellendus natus, aspernatur error, voluptatibus fuga itaque ea quasi consequuntur quis ipsam! Non fuga, totam ullam ea nulla similique.</p>
+                    </div>
+
+                    <div class="row-3">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        <i class="fa-solid fa-share-nodes"></i>
+                        <button class="btn-subscribe">Subscribe</button>
+                    </div>
+                </div>
+
+                <div class="banner banner-img-type">
+                    <div class="row-1">
+                        <h1>Welcome to Online TechSnap !</h1>
+
+                        <p>Posted by Krishna
+                            &#x2022;
+                            <span><i class="fa-solid fa-globe"></i></span>
+                            Global
+                            &#x2022;
+                            <span><i class="fa-solid fa-clock-rotate-left"></i></span>
+                            Edited
+                            &#x2022;
+                            <span><i class="fa-solid fa-sitemap"></i></span>
+                            Confidentially Released
+                        </p>
+                    </div>
+
+                    <div class="row-2">
+                        <img src="images/tech-img-2.jpg">
+                    </div>
+
+                    <div class="row-3">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        <i class="fa-solid fa-share-nodes"></i>
+                        <button class="btn-subscribe">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="{% static "js/app.js"%}"></script>
+</body>
+
+</html>

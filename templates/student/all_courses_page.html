@@ -1,0 +1,624 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Courses Page</title>
+    <link rel="stylesheet" href="{% static "css/all.css"%}">
+    <link rel="stylesheet" href="{% static "css/all_courses_style.css"%}">
+    <!----===== Boxicons CSS ===== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <header class="header">
+        <div class="first-header">
+            <div class="left-header">
+                <div class="menu-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+
+                <img id="logo" src="{% static "images/logo.png"%}">
+            </div>
+
+            <div class="right-header">
+                <div class="all-apps-container">
+                    <div class="right-header-icons">
+                        <img class="all-apps-icon icon" src="{% static "images/Apps.png"%}">
+                    </div>
+                </div>
+
+                <div class="notification-container">
+                    <div class="right-header-icons">
+                        <img class="notify-icon icon" src="{% static "images/notification.png"%}">
+                    </div>
+                    <div class="dropdown">
+                        <div class="notify_item">
+                            <div class="notify_img">
+                                <img src="{% static "images/User.png"%}" alt="profile_pic" style="width: 50px">
+                            </div>
+                            <div class="notify_info">
+                                <p>You have submitted your assignment submission for<span>Assignment-1</span></p>
+                                <button class="notify-btn">Explore All</button>
+                            </div>
+                            <div class="notify_time">
+                                <p>2h</p>
+                                <h1>...</h1>
+                            </div>
+                        </div>
+                        <div class="notify_item">
+                            <div class="notify_img">
+                                <img src="{% static "images/User.png"%}" alt="profile_pic" style="width: 50px">
+                            </div>
+                            <div class="notify_info">
+                                <p>You have submitted your assignment submission for<span>Assignment-1</span></p>
+                                <button class="notify-btn">Explore All</button>
+                            </div>
+                            <div class="notify_time">
+                                <p>2h</p>
+                                <h1>...</h1>
+                            </div>
+                        </div>
+                        <div class="notify_See_All">
+                            <button class="see-All">See All Notifications</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-container">
+                    <div class="right-header-icons">
+                        <img class="profile-icon icon" src="{% static "images/User.png"%}">
+                    </div>
+                    <div class="dropdown-content">
+                        <a href="#"><span><i class="fa-solid fa-gauge"></i>Dashboard</span></a>
+                        <a href="#"><span><i class="fa-solid fa-table"></i>Grades</span></a>
+                        <a href="#"><span><i class="fa-solid fa-comment"></i>Messages</span></a>
+                        <a href="#"><span><i class="fa-solid fa-wrench"></i>Preferences</span></a>
+                        <a href="#"><span><i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="second-header">
+            <nav class="nav-bar">
+                <ul class="navigation">
+                    <li class="tab-item"><a href="#item1" class="active" onclick="return false">All</a></li>
+                    <li class="tab-item"><a href="#item2" onclick="return false">BCA_Sem1</a></li>
+                    <li class="tab-item"><a href="#item3" onclick="return false">BCA_Sem2</a></li>
+                    <li class="tab-item"><a href="#item4" onclick="return false">BCA_Sem3</a></li>
+                    <li class="tab-item"><a href="#item5" onclick="return false">BCA_Sem4</a></li>
+                    <li class="tab-item"><a href="#item6" onclick="return false">BCA_Sem5</a></li>
+                    <li class="tab-item"><a href="#item7" onclick="return false">BCA_Sem6</a></li>
+                    <li class="tab-item"><a href="#item8" onclick="return false">BCA_Sem7</a></li>
+                    <li class="tab-item"><a href="#item9" onclick="return false">BCA_Sem8</a></li>
+                    <li class="tab-item"><a href="#item10" onclick="return false">Additional</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="content-container">
+        <nav class="sidebar close">
+            <header>
+                <i class='bx bx-chevron-right toggle'></i>
+            </header>
+
+            <div class="menu-bar">
+                <div class="menu">
+                    <ul class="menu-links">
+                        <li class="nav-link">
+                            <a href="index.html">
+                                <i class='bx bx-home-alt icon'></i>
+                                <span class="text nav-text">Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a class="active" href="#">
+                                <i class='bx bx-bar-chart-alt-2 icon'></i>
+                                <span class="text nav-text">All courses</span>
+                            </a>
+
+
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="#">
+                                <i class='bx bx-bell icon'></i>
+                                <span class="text nav-text">Calender</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="notifications_page.html">
+                                <i class='bx bx-pie-chart-alt icon'></i>
+                                <span class="text nav-text">Notifications</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="#">
+                                <i class='bx bx-heart icon'></i>
+                                <span class="text nav-text">Your Files</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="#">
+                                <i class='bx bx-wallet icon'></i>
+                                <span class="text nav-text">Events</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="bottom-content">
+                    <li class="">
+                        <a href="#">
+                            <i class='bx bx-log-out icon'></i>
+                            <span class="text nav-text">Logout</span>
+                        </a>
+                    </li>
+
+                    <li class="mode">
+                        <div class="sun-moon">
+                            <i class='bx bx-moon icon moon'></i>
+                            <i class='bx bx-sun icon sun'></i>
+                        </div>
+                        <span class="mode-text text">Dark mode</span>
+
+                        <div class="toggle-switch">
+                            <span class="switch"></span>
+                        </div>
+                    </li>
+
+                </div>
+            </div>
+        </nav>
+
+        <section class="home">
+            <div class="wrapper_tab-content">
+                <section id="item1" class="tab-content content-visible">
+                    <div class="course-list">
+                        
+                        {% for course in courses %}
+                        <div class="course-card">
+                            <img
+                                src="{{course.image.url}}">
+                            <div class="details">
+                                <a href="{% url 'course-detail' %}" target="_blank">{{course.title}}</a>
+
+                                <p>{{course.category}}</p>
+                                <p class="spec">{{course.created_by.username}}</p>
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </section>
+
+                <section id="item2" class="tab-content">
+                    <div class="course-list">
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <section id="item3" class="tab-content">
+                    <div class="course-list">
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="item4" class="tab-content">
+                    <div class="course-list">
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="item5" class="tab-content">
+                    <div class="course-list">
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="item6" class="tab-content">
+                    <div class="course-list">
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="item7" class="tab-content">
+                    <div class="course-list">
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="item8" class="tab-content">
+                    <div class="course-list">
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="item9" class="tab-content">
+                    <div class="course-list">
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="item10" class="tab-content">
+                    <div class="course-list">
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-card">
+                            <img src="images/logo.png">
+                            <div class="details">
+                                <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                    target="_blank">Fundamentals of IT and Programming</a>
+
+                                <p>DAC1101-MAY-21</p>
+                                <p>BCA_Sem1</p>
+
+                                <div class="message">
+                                    <a href="https://vincenzo5k.github.io/TechSnap-Course-Detail-Page/"
+                                        target="_blank"><i class="fa-solid fa-message"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="{% static "js/app.js"%}"></script>
+    <script src="{% static "js/all_courses.js"%}"></script>
+</body>
+
+</html>
