@@ -53,7 +53,40 @@ class course(models.Model):
     def __str__(self):
         return self.title 
 
+class Description(models.Model):
+    course = models.ForeignKey(course, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+    prerequisites = models.CharField(max_length=300)
+    certificate = models.ImageField()
+    no_of_learners = models.IntegerField(null=True)
 
+    def __str__(self):
+        return self.title
+
+class courseAnouncement(models.Model):
+    course = models.ForeignKey(course, on_delete=models.CASCADE)
+    instructor = models.ForeignKey(User, on_delete=models.CASCADE)
+    body = models.TextField(blank=True, null=True)
+    img = models.ImageField(upload_to='AnouncementImg', null=True, blank=True)
+    posted_on = models.DateField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return self.posted_on
+
+class Resource(models.Model):
+    course = models.ForeignKey(course, on_delete=models.CASCADE)
+    file = models.FileField(upload_to='resourceFiles', blank=True, null=True)
+    link = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        restype = ""
+        if self.file:
+            restype += "file "
+        else:
+            restype += "link "
+        return f"{restype} resource for {self.course.title}"
+    
 
 def create_course_units(sender, instance, created, **kwargs):
     if created:

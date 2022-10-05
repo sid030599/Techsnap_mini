@@ -34,7 +34,7 @@
                               <span style="color: mintcream;font-family: cursive;letter-spacing: 1px;">Welcome {{request.user}}</span>
                           </a>
                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="{% url 'usercourse' %}">My courses</a>
+                              <a class="dropdown-item" href="">My courses</a>
                               <a class="dropdown-item" href="{% url 'my-grades' %}">My Grades</a>
                               <a class="dropdown-item" href="#">Account</a>
                               <a class="dropdown-item" href="/logout">Logout</a>
@@ -49,8 +49,8 @@
                             <span style="color: mintcream;font-family: cursive;letter-spacing: 1px;">Welcome {{request.user}}</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url 'usercourse' %}">My courses</a>
-                            <a class="dropdown-item" href="{% url 'groups' %}">Groups</a>
+                            <a class="dropdown-item" href="">My courses</a>
+                            <a class="dropdown-item" href="">Groups</a>
                             <a class="dropdown-item" href="#">Account</a>
                             <a class="dropdown-item" style="cursor:pointer;" data-toggle="modal" data-target="#coursemodal">create Course</a>
                             <a class="dropdown-item" href="/logout">Logout</a>
@@ -209,7 +209,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action={% url 'create-course' %} method="post" enctype="multipart/form-data">{% csrf_token %}
+              <form action="#" method="post" enctype="multipart/form-data">{% csrf_token %}
                 <div class="form-group">
                   <label for="title">Title</label>
                   <input type="text" class="form-control" id="title" name="title"

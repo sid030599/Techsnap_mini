@@ -1,0 +1,8 @@
+.colors:hover{
+    background-color: none;
+}
+@media screen and (max-width:1200px) {
+    .texts{
+        font-size: small;
+    }
+}

@@ -1,0 +1,143 @@
+
+body{
+  justify-content: center;
+  position: relative;
+}
+#header,.footer-section{
+  max-width: 1200px;
+}
+a{
+text-decoration: none;
+color: black;
+}
+.navbar-nav .nav-item{
+  font-size: large;
+}
+.navbar-nav .nav-item:hover{
+  border-radius: 8%;
+  background-color: rgb(243, 243, 243);
+}
+
+.navbar-nav .dropdown{
+  position: static;
+}
+.navbar-nav .dropdown-menu.show {
+  right: 0;
+  display: block;
+  border-top: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-color: white;
+  width: 100%;
+}
+
+@media screen and (max-width: 580px){
+  .foot div{
+    width: 100%;
+  }
+}
+.box{
+  font-weight: 500;
+}
+.box:hover{
+  background-color: #0d6efd;
+  color: white;
+}
+.data{
+  padding-right: 32px;
+}
+.data:hover{
+  padding-right: 40px;
+}
+.terms{
+  padding-top: 15px;
+  padding-bottom: 35px;
+  padding-left: 12px;
+}
+.icon{
+  width: 24px;
+  height: 24px;
+}
+.drop{
+  padding-top: 48px;
+  padding-bottom:48px;
+  top: 70px !important;
+}
+@media screen and (max-width:991px) {
+  .nav-item .shadow {
+    box-shadow: none !important;
+}
+}
+@media screen and (max-width:990px){
+  .navbar-nav .nav-item:hover{
+    border-radius: 1%;
+    background-color: rgb(243, 243, 243);
+  }
+}
+@media screen and (min-width:991px){
+  .navbar-nav .dropdown-menu.show {
+    background-size: 30% 60%;
+    background-image: url(../images/global-navigation.svg);
+    background-repeat: no-repeat;
+    background-position-x: left;
+    background-position-y: bottom;
+  }
+}
+@media screen and (min-width: 1200px) {
+  body,#header ,.footer-section{
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+  }
+}
+  .hide{
+    display: none;
+  }
+  .mbcontent{
+    display: none;
+  }
+  .tog{
+    display: none;
+  }
+  .offcanvas.show{
+    width: 70%; /*example + never use min-width with this solution */
+    height: 100%;
+}
+.offcanvas.show li{
+  border-top: 1px solid #00000031;
+}
+.offcanvas.show .dropdown-menu.show .row{
+  display: none;
+}
+.offcanvas.show .dropdown-menu.show{
+  padding: 0;
+}
+.offcanvas.show .tog{
+  display: block;
+}
+.offcanvas.show .dropdown-menu.show .mbcontent{
+  display: block;
+  list-style: none;
+  padding-left: 0;
+  font-size: medium;
+}
+.offcanvas.show .signbt{
+  border-top: 1px solid #00000031;
+  padding-top: 10px;
+}
+#footer a{
+  text-decoration: none;
+  color: white;
+}
+#footer hr{
+  color: white;
+}
+.list-unstyled .Learn{
+  font-size: 18px !important;
+  margin-bottom: 12px;
+}
+.list-unstyled li{
+  font-size: 17px;
+  line-height: 32px;
+}

@@ -9,7 +9,6 @@ from .models import Assignment, College, Files, course, courseTopic, myAssignmen
 from django.http import JsonResponse
 from django.db.models import Q
 
-
 # Create your views here.
 def home(request):
 
@@ -33,7 +32,19 @@ def course_list_page(request):
     return render(request, "student/all_courses_page.html", {'courses': courses})
 
 def course_detail(request, slug):
-    details = course.objects.filter(slug=slug)
+    details = course.objects.filter(slug=slug).first()
+    units = courseUnit.objects.filter(course=details)
+    units_ = []
+    for unit in units:
+        units_.append({
+            'unit': unit,
+            'topics': unit.topics.all()
+        })
+    payload = {
+        'details': details,
+        'units': units_
+    }
+
     return render(request, "student/course_detail.html")
 
 def notifications_page(request):
@@ -49,8 +60,8 @@ def coursepage(request):
     return render(request, 'courses.html', {'courses': courses, 'excluded': excluded, 'college_choices': college_choices})
 
 def usercourse(request):
-    courses = mycourses.objects.get(user=request.user).courses.all()
-
+    courses = mycourses.objects.filter(user=request.user)
+    print(courses)
     if request.user.profile.status == 't':
         courses = course.objects.filter(created_by=request.user)
         return render(request, 'editcourses.html', {'courses': courses, 'user':request.user})
@@ -303,6 +314,7 @@ def enrollcourse(request, courseid, studentid):
     units = courseUnit.objects.filter(course__id=courseid)
 
     for unit in units:
+        print("fd")
         myunit = myCourseUnit.objects.create(courseunit=unit, user=student)
         for topic in unit.topics.all():
             mytopic = mytopics(user=student, coursetopic=topic)

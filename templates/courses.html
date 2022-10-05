@@ -8,7 +8,7 @@
         <div class="card-body">
           <p class="card-text">{{course.category}}</p>
           <h5 class="card-title">{{course.title}}</h5><br />
-          <a href={% url 'enroll' course.id %} style="color: red;font-weight: bold;">Enroll course</a>
+          <a href={% url 'enroll' course.id user.id %} style="color: red;font-weight: bold;">Enroll course</a>
         </div>
       </div>
     {% endfor %}

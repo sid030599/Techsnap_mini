@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning Vertos</title>
+  <!--bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static "courses/css/navbar.css"%}">
+  <link rel="stylesheet" href="{% static "courses/css/styles.css"%}">
+  <link rel="stylesheet" href="{% static "courses/css/open.css"%}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+
+<body class="">
+  <section class="shadow-sm sticky-top bg-white">
+    <div id="header" class="d-flex align-items-center justify-content-center" style="height: 76px;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white flex-fill">
+      <div class="container-fluid">
+        <img src="{% static "courses/images/Learning-Vertos-logo-White.jpg"%}" id="logo" width="240px" height="50px">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-start bg-white" tabindex="-1" id="navbarSupportedContent">
+          <ul class="navbar-nav mb-2 mb-lg-0 ms-lg-auto">
+            <li class="nav-item">
+              <button type="button" class="float-end tog m-2 btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle mx-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Bootcamps
+              </a>
+              <div class="container-fluid dropdown-menu drop shadow" aria-labelledby="navbarDropdown">
+                <ul class="mbcontent">
+                  <li><a class="dropdown-item" href="#">Datascience Bootcamp</a></li>
+                  <li><a class="dropdown-item" href="#">Web development Bootcamp</a></li>
+                  <li><a class="dropdown-item" href="#">UX Design Bootcamp</a></li>
+                  <li><a class="dropdown-item" href="#">Digital Marketing Bootcamp</a></li>
+                </ul>
+                <div class="row px-4">
+                  <div class="col-md-5 pe-5">
+                    <h5 class="banner-h5 text-secondary">FULL-TIME OR PART-TIME</h5>
+                    <h3 class="banner-h3">Bootcamps</h3>
+                    <p class="banner-p pb-3 pe-3 lh-lg">Our award-winning bootcamps will help you launch a new career in tech in-person or online. You can attend our bootcamps full-time or part-time.</p>
+                    <a class="banner-test text-primary fw-bold" href="#">Testimonals ></a>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="container-fluid mb-2">
+                      <div class="row row-cols-2 text-center">
+                        <div class="flex col p-1">
+                          <div class="border box py-4 px-2 flex-fill shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="icon bi bi-pie-chart" viewBox="0 0 16 16">
+                              <path d="M7.5 1.018a7 7 0 0 0-4.79 11.566L7.5 7.793V1.018zm1 0V7.5h6.482A7.001 7.001 0 0 0 8.5 1.018zM14.982 8.5H8.207l-4.79 4.79A7 7 0 0 0 14.982 8.5zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+                            </svg>
+                            <p class="d-inline data">Datascience Bootcamp</p>
+                            <p class="ms-5 d-inline arrow">></p></div>
+                        </div>
+                        <div class="flex col p-1">
+                          <div class="border box py-4 px-2 flex-fill shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-laptop icon" viewBox="0 0 16 16">
+                              <path d="M13.5 3a.5.5 0 0 1 .5.5V11H2V3.5a.5.5 0 0 1 .5-.5h11zm-11-1A1.5 1.5 0 0 0 1 3.5V12h14V3.5A1.5 1.5 0 0 0 13.5 2h-11zM0 12.5h16a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5z"/>
+                            </svg>
+                            <p class="d-inline data">Web development Bootcamp</p>
+                            <p class="ms-1 d-inline arrow">></p></div>
+                        </div>
+                        <div class="flex col p-1">
+                          <div class="border box py-4 px-2 flex-fill shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-person icon" viewBox="0 0 16 16">
+                              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                            </svg>
+                            <p class="d-inline data">UX Design Bootcamp</p>
+                            <p class="ms-5 d-inline arrow">></p></div>
+                        </div>
+                        <div class="flex col p-1">
+                          <div class="border box py-4 px-2 flex-fill shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="icon bi bi-phone" viewBox="0 0 16 16">
+                              <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
+                              <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                            </svg>
+                            <p class="d-inline data">Digital Marketing Bootcamp</p>
+                            <p class="ms-1 d-inline arrow">></p></div>
+                        </div>
+                      </div>
+                      <div class="text-center pt-3">
+                        <p class="banner-p d-inline">We'll help you land your dream job in tech.</p>
+                        <button class="d-inline btn px-4 py-2 btn-outline-primary shadow-sm" type="submit">Join for free</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle mx-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Courses
+              </a>
+              <div class="container-fluid dropdown-menu shadow drop" aria-labelledby="navbarDropdown">
+                <ul class="mbcontent">
+                  <li><a class="dropdown-item" href="#">Data</a></li>
+                  <li><a class="dropdown-item" href="#">Development</a></li>
+                  <li><a class="dropdown-item" href="#">Design</a></li>
+                  <li><a class="dropdown-item" href="#">Marketing</a></li>
+                  <li><a class="dropdown-item" href="#">Product</a></li>
+                </ul>
+                <div class="row px-4">
+                  <div class="col-md-5 pe-5">
+                    <h5 class="banner-h5 text-secondary">PART-TIME CERTIFICATE</h5>
+                    <h3 class="banner-h3">Courses</h3>
+                    <p class="banner-p pb-3 pe-3 lh-lg">Learn a new digital skill by taking one of our certificate courses in-person or online. Our courses are part-time and can take anywhere from 5 to 10 weeks to complete.</p>
+                    <a class="banner-test text-primary fw-bold" href="#">Testimonals ></a>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="container-fluid">
+                      <div class="row banner-p row-cols-md-3 text-center">
+                        <div class="flex col p-1">
+                          <ul class="list-unstyled text-secondary text-start">
+                            <li class="Learn text-dark fw-bold">Data</li>
+                            <li class=""><a href="">Data Analytics</a></li>
+                            <li class=""><a href="">Data Science</a></li>
+                            <li class=""><a href="">Python</a></li>
+                            <li class=""><a href="">Cybersecurity</a></li>
+                            <li class="pt-4 Learn text-dark fw-bold">Design</li>
+                            <li class=""><a href="">UX Design</a></li>
+                            <li class=""><a href="">UI Design</a></li>
+                          </ul>
+                        </div>
+                        <div class="flex col p-1">
+                          <ul class="list-unstyled text-secondary text-start">
+                            <li class="Learn text-dark fw-bold">Development</li>
+                            <li class=""><a href="">Web Development</a></li>
+                            <li class=" pt-4 Learn text-dark fw-bold">Marketing</li>
+                            <li class=""><a href=""> Digital Marketing</a></li>
+                            <li class=""><a href="">Social Media Marketing</a></li>
+                            <li class=""><a href="">Search Engine Marketing</a></li>
+                          </ul>
+                        </div>
+                        <div class="flex col p-1">
+                          <ul class="list-unstyled text-secondary text-start">
+                          <li class="Learn text-dark fw-bold">Product</li>
+                            <li class=""><a href="">Product Management</a></li>
+                            <li class=""><a href="">Product Leadership</a></li>
+                            <li class=""><a href="">Design Thinking</a></li></ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle mx-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Resourses
+              </a>
+              <div class="container-fluid dropdown-menu shadow drop" aria-labelledby="navbarDropdown">
+                <ul class="mbcontent">
+                  <li><a class="dropdown-item" href="#">Learn</a></li>
+                  <li><a class="dropdown-item" href="#">Connect</a></li>
+                  <li><a class="dropdown-item" href="#">Feature</a></li>
+                </ul>
+                <div class="row banner-p px-4">
+                  <div class="col pe-5">
+                    <h5 class="text-secondary">Learn</h5>
+                    <hr>
+                    <ul class="lh-md-lg list-unstyled text-secondary text-start">
+                      <li class="items"><a href="">Blog</a></li>
+                      <li class="items"><a href="">Customer stories</a></li>
+                      <li class="items"><a href="">Resource center</a></li>
+                      <li class="items"><a href="">Guides</a></li>
+                      <li class="items"><a href="">App download</a></li>
+                      <li class="items"><a href="">Support</a></li>
+                    </ul>
+                  </div>
+                  <div class="col pe-5">
+                    <h5 class="text-secondary">Connect</h5>
+                    <hr>
+                    <ul class="lh-md-lg list-unstyled text-secondary text-start">
+                      <li class="items"><a href="">Event</a></li>
+                      <li class="items"><a href="">Webinar</a></li>
+                      <li class="items"><a href="">All Hands on Tech Poadcasts</a></li>
+                      <li class="items"><a href="">perspectives in leadership podscast</a></li>
+                    </ul>
+                  </div>
+                  <div class="col pe-3">
+                    <h5 class="text-secondary">Feature</h5>
+                    <hr>
+                    <img src="images/feature.jpeg" class="img1 border border-rounded" style="width: 100%; height:50%; object-fit:cover;">
+                    <h6 class="banner-p pt-1">State of Upskilling Report 2022</h6>
+                    <p class="banner-p pb-md-3 mb-0 pe-3">Dive into the data pool with the 2022 State of Upskilling</p>
+                    <a class="banner-test text-primary fw-bold" href="#">Know more <span class="arrow">></span></a>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active mx-2" href="#">Pricing</a>
+            </li>
+            <li>
+              <form class="d-flex signbt">
+                {% if user.is_authenticated %}
+                <button class="btn px-4 py-2 btn-success shadow-sm"><a href="{% url "lms" %}" class="text-white">Go to LMS</a></button>
+                {% else %}
+                <button class="btn px-4 py-2 btn-outline-none me-2"><a href="{% url "handlesignup" %}">Signup</a></button>
+                {% endif %}
+              </form>
+            </li>
+          </ul>     
+        </div>
+      </div>
+    </nav>
+  </div>
+  </section>
+  <section class="banner-section" style="background-color: #2a4494; color:white;">
+    <div class="banner container-fluid text-start">
+        <div class="row">
+        <div class="col-md-7 col-10 text-white soff py-4 my-3 px-0">
+        <p>Program Offered by</p>
+        <div class="mb-2">
+            <img src="{% static "courses/images/iit-logo.svg"%}" class="program-logo">
+            <img src="{% static "courses/images/guvi.svg"%}" class="pl-2 program-logo">
+        </div>
+        <h2>{{course.course_title}}</h2>
+        <h4 class="custom">Access the complete course for {{course.course_price}}</h4>
+        <p class="banner-content">{{course.course_overview}}</p>
+        <h3 class="fw-bold">Difficulty : {{course.course_level}}</h3>
+        <div class="d-flex my-4 align-items-center">
+            <div class="stars mr-4">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star-white"></div>
+            </div>
+            <strong class="ms-2 rating">4.4 ({{description.no_of_learners}})</strong>
+        </div>
+        <div class="d-flex justify-content-center justify-content-md-start" hidden>
+            <button type="button" class="btn btn-outline-light rounded-pill d-flex align-items-center" id="preview">
+            <i class="icn icn-play"></i> Course preview video</button>
+        </div>
+        <p class="mt-2 fw-bold">*Pay for only IIT-M certification</p>
+        </div>
+        </div>
+    </div>
+  </section>
+  <section class="content-section">
+    <div class="content container-fluid text-start">
+        <div class="row">
+            <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
+                <h2 class> Description </h2>
+                <p>{{description.description}}</p>
+            </div>
+            <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
+                <h2> Top Skills you will learn </h2>
+                <ul class="ps-0">
+                  {% for point in whatuget_points %}
+                    <li class="tick">{{point.text}}</li>
+                  {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
+                <h2 class="m-0 mb-4"> Highlights </h2>
+                <ul class="highlight ps-0">
+                    <li class="tick">Certificate of Completion by IIT-Madras</li>
+                    <li class="tick"> Self Paced – 100% Online Learning</li>
+                    <li class="tick"> Lifetime Access</li>
+                    <li class="tick"> GUVI Forum Support</li>
+                    <li class="tick">Codekata – Gamified coding Arena</li>
+                </ul>
+            </div>
+            <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
+                <h2> Who should Enroll </h2>
+                <ul class="ps-0">
+                    <li class="bullet">Beginners with no previous programming experience looking to obtain the skills to get their first programming job.</li>
+                    <li class="bullet">Anyone looking to to build the minimum Python programming skills necessary as a pre- requisites for moving into machine learning, data science, and artificial intelligence.</li>
+                    <li class="bullet">Existing programmers who want to improve their career options by learning the Python programming language.</li>
+                </ul>
+            </div>
+            <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
+                <h2> Job opportunities</h2>
+                <ul class="ps-0">
+                    <li class="tick">Python Developer</li>
+                    <li class="tick"> Research Analyst</li>
+                    <li class="tick"> Data Analyst</li>
+                    <li class="tick"> Data Scientist</li>
+                    <li class="tick">Software Developer</li>
+                </ul>
+            </div>
+            <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
+                <h2 class> Course Syllabus </h2>
+                <div class="accordion" id="accordionExample">
+                  {% for content in contents %}
+                  <div class="accordion-item card text-secondary shadow-sm mb-2">
+                    <div class="accordion-button collapsed"type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      <div class="col-9 p-0 d-flex align-items-center">
+                        <div class="col-sm-12 col-md-8 p-0">
+                          <h5 class="m-0 pl-0 pointer col-12 d-flex align-items-center">{{content.unit.title}}</h5>
+                        </div>
+                        <h6 class="m-0 pointer col-sm-12 col-md-4 d-none d-md-block align-items-center text-secondary">{{content.length}} Lessons</h6>
+                      </div>
+                    </div>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="row">
+                          <div class="col">
+                            <ul class="list-unstyled steps" >
+                              {% for lesson in content.lessons %}
+                              <li>{{lesson.title}}</li>
+                              {% endfor %}
+                            </ul>
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
+                <h2 class> Pre-requisites </h2>
+                <p> No previous coding experience is needed </p>
+            </div>
+            <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
+                <h2> Certificate </h2>
+                <div class="d-flex align-items-center justify-content-center flex-column flex-md-row">
+                    <div class="col-md-6 col-10 d-flex justify-content-center">
+                        <ul class="ps-0">
+                            <li class="tick mb-md-3">IIT-M Certification is available on pay per basis.</li>
+                            <li class="tick mb-md-3">Certificate is generated for every course individually.</li>
+                            <li class="tick mb-md-3">Certificates are auto-generated, once payment has been made</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 col-10">
+                        <img src="{{description.certificate.url}}" class="w-100" id="certificateImg">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-11 col-11 soff py-3 mt-3 p-0">
+                <h2> Testimonials </h2>
+                <div class="col-md-10 col-11">
+                    <div class="d-flex flex-md-row flex-column">
+                      {% for testimonial in testimonials %}
+                        <div class="card shadow-sm  col-md-3 col-12 testimo">
+                            <div class="card-content pt-3">
+                                <p>{{testimonial.thoughts}}<p>
+                                <p class="pt-2 fw-bold">{{testimonial.name}}</p>
+                            </div>
+                        </div>
+                      {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
+                <h2> Why GUVI? </h2>
+                <p>Guvi is an IIT-M , IIM-A incubated company located at IITM Research Park, Chennai. We help students master any programming skills so that they can learn and effectively practise the acquired knowledge and skills necessary to thrive in their career. Our feature includes practicing exercises, instructional videos, and a personalized learning dashboard that empowers learners to study at their own pace.</p>
+            </div>
+            <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
+                <div class="d-inline-flex align-items-center">
+                    <img src="{% static "courses/images/codekata.svg"%}" class="mr-3 ck-img">
+                    <h1 class="codekata-title m-0">CodeKata</h1>
+                    <a href="javascript:void(0);" data-toggle="tooltip">
+                        <img src="{% static "courses/images/guvi-anniversary-icon-new.png"%}" class="w-50 m-3"></a>
+                </div>
+                <div class="d-flex align-items-center justify-content-center flex-column flex-md-row">
+                    <div class="col-md-6 col-10">
+                        <p>Get access to the platform that helps users to practise multiple programs that are curated by the experts from the industry. CodeKata involves the concepts of gamification and personalization with 1000+ problem statements.</p>
+                    </div>
+                    <div class="col-md-6 col-10">
+                        <img src="{% static "courses/images/ck.png"%}" class="w-100" src="images/ck.png" alt="artwork">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
+                <div class="d-inline-flex align-items-center mb-4">
+                    <img src="{% static "courses/images/IDE-icon.svg"%}" class="mr-3">
+                    <h1 class="codekata-title m-0">IDE</h1>
+                </div>
+                <div class="d-flex align-items-center justify-content-center flex-column flex-md-row">
+                    <div class="col-md-6 col-10">
+                        <p>GUVI IDE is an Integrated Development Environment that lets you write, edit, run, test & debug your code. You can fix your code with the debugger supported by language like JavaScript, Python3 & Ruby. While, you can write code in 20 different programming languages.</p>
+                    </div>
+                    <div class="col-md-6 col-10">
+                        <img class="w-100" src="{% static "courses/images/python-ide-img.png"%}" alt="artwork">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12 d-flex justify-content-end p-0 p-md-3 ps-md-5 fix-top ">
+                <div class="card col-12 mr-md-1 shadow" id="formCard">
+                    <div class="card-body">
+                        <h5 class> Fill this form to get this course </h5>
+                        <form class="pt-2 pb-3" >
+                            <div class="text-start form-outline mb-3">
+                              <label>Username</label>
+                              <input type="text" id="form2" placeholder="Enter your name" class="form-control form-control" />
+                            </div>
+                            <div class="text-start form-outline mb-3">
+                              <label>Phone number</label>
+                              <input type="number" id="form2" placeholder="Mobile number" class="form-control form-control" />
+                            </div>
+                            <!-- Password input -->
+                            <div class="text-start form-outline mb-3">
+                              <label>Password</label>
+                              <input type="password" id="form2" placeholder="Password" class="form-control form-control" />
+                            </div>
+                            <div class="text-start form-outline mb-5">
+                                <label>Referrel code</label>
+                                <input type="number" id="form2" placeholder="Enter code" class="form-control form-control" />
+                              </div>
+                            <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-block">Enroll now</button></div>
+                          </form>
+                          
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 col-10 soff py-3 my-3 p-0">
+              <h2 class> Frequently Asked Questions </h2>
+              <div class="accordion" id="accordionExample">
+                {% for faq in faqs %}
+                <div class="accordion-item card text-secondary shadow-sm mb-2">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      {{faq.question}}
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <p>{{faq.answer}}</p>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+        </div>
+    </div>
+  </section>
+  </body>
+  </html>

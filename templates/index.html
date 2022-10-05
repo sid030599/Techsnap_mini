@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
-{% load custom_tags %}
+
 {% block content %}
   {% if request.user.is_authenticated  %}
     {% if request.user.profile.status == 't' %}
-      <p>go to the  <a href="{% url 'usercourse' %}">courses</a> which you have created.</p>
+      <p>go to the  <a href="#">courses</a> which you have created.</p>
     
     {% elif request.user.profile.status == 's' %}
-      <p>go to the <a href="{% url 'usercourse' %}">courses</a> which you have enrolled.</p>
+      <p>go to the <a href="#">courses</a> which you have enrolled.</p>
     
     {% else %}
       <h2 class="mx-5">These are your current teachers</h2>

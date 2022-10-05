@@ -78,7 +78,7 @@
                     <a href="#"><span><i class="fa-solid fa-table"></i>Grades</span></a>
                     <a href="#"><span><i class="fa-solid fa-comment"></i>Messages</span></a>
                     <a href="#"><span><i class="fa-solid fa-wrench"></i>Preferences</span></a>
-                    <a href="#"><span><i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</span></a>
+                    <a href="/logout"><span><i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</span></a>
                 </div>
             </div>
         </div>
@@ -183,12 +183,12 @@
                                     {% for course in courses %}
                                     <div class="course-card">
                                         <img
-                                            src="{{course.image.url}}">
+                                            src="{{course.course_img.url}}">
                                         <div class="details">
-                                            <a href="{% url 'course-detail' course.slug %}" target="_blank">{{course.title}}</a>
+                                            <a href="{% url 'course-description' course.slug %}" target="_blank">{{course.course_title}}</a>
 
-                                            <p>{{course.category}}</p>
-                                            <p class="spec">{{course.created_by.username}}</p>
+                                            <p>{{course.course_overview}}</p>
+                                            <p class="spec">{{course.instructor.user.username}}</p>
 
                                         </div>
                                     </div>
