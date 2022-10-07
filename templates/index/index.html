@@ -207,6 +207,7 @@
                 {% if user.is_authenticated %}
                 <button class="btn px-4 py-2 btn-info shadow-sm w3-margin-right w3-margin-left"><a href="{% url "course-list" %}" class="text-white">See all courses</a></button>
                 <button class="btn px-4 py-2 btn-success shadow-sm"><a href="{% url "lms" %}" class="text-white">Go to LMS</a></button>
+                <button class="btn px-4 py-2 w3-red shadow-sm"><a href="{% url "handlelogout" %}" class="text-white">Logout</a></button>
                 {% else %}
                 <button class="btn px-4 py-2 btn-outline-none me-2"><a href="{% url "handlesignup" %}">Signup</a></button>
                 {% endif %}

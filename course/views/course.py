@@ -7,23 +7,22 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import View
 from django.contrib import messages
+from course.forms import *
 
 def home(request):
-    college_choices = College.objects.all()
-    return render(request, 'index/index.html', {'college_choices': college_choices})
+    return render(request, 'index/index.html', {})
 
 def lms(request):
-    college_choices = College.objects.all()
     if request.user.is_authenticated:
-        if request.user.profile.status == 't':
+        if request.user.profile.is_creator:
             return redirect('admin-panel', request.user.profile.slug)
-        elif request.user.profile.status == 's':
+        elif request.user.profile.is_student:
             announcements = GeneralAnouncement.objects.all()[:5]
             courses = Course.objects.all()
             count = len(courses)
             courses = courses[:6]
             return render(request, 'student/index.html', {'courses': courses, 'announcements': announcements, 'total_courses': count})
-    return render(request, 'index/index.html', {'college_choices': college_choices})
+    return render(request, 'index/index.html')
 
 def handleteachersignup(request):
     if request.method == 'POST':
@@ -83,8 +82,6 @@ def handlesignup(request):
         email = request.POST['email']
         pass1 = request.POST['password']
         pass2 = request.POST['pass2']
-        college = request.POST['college']
-
 
         # check for errorneous input
         if len(username) > 20:
@@ -111,8 +108,13 @@ def handlesignup(request):
             form1.save()
 
             user = User.objects.get(username=username)
-            user.profile.college = college
-            user.save()
+            profile = Profile.objects.create(user=user, status="s")
+            print(profile)
+            user = authenticate(username=username, password=pass1)
+            if user is not None:
+                login(request, user)
+                messages.success(request, "Successfully logged in")
+                return redirect('home')
 
             messages.success(request, "Your account has created.")
             return redirect('home')
@@ -392,30 +394,17 @@ class CoursePaymentView(View):
         user = profile
         course = Course.objects.filter(slug__iexact=slug).first()
         lessons = Lesson.objects.filter(unit__course=course)
-        total_xp = 0
-        for lesson in lessons:
-            total_xp = total_xp + lesson.xp
         price = course.course_price
-        affordable = False
-        if price != 'FREE':
-            price = int(price)
-            if user.techsnap_cash > price:
-                affordable = True
-        else :
-            affordable = True
 
         data = {
             'slug': course.slug,
             'title': course.course_title,
             'img': course.course_img,
-            'duration': course.course_duration,
             'lessons': len(lessons),
-            'total_xp': total_xp,
             'price': course.course_price,
-            'affordable': affordable
         }
 
-        return render(request, 'course/payment.html', data)
+        return render(request, 'courses/payment.html', data)
     
     def post(self, request, slug):
         profile = Profile.objects.get(user=request.user)
@@ -468,3 +457,51 @@ def lesson_timer_update(request, pk):
     lesson.save(update_fields=['timer_min_left', 'timer_sec_left'])
 
     return JsonResponse({})
+
+
+from django.utils.translation import get_language
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
+from course import Checksum
+from accounts.models import PaytmHistory
+
+def payment(request):
+    MERCHANT_KEY = settings.PAYTM_MERCHANT_KEY
+    MERCHANT_ID = settings.PAYTM_MERCHANT_ID
+    get_lang = "/" + get_language() if get_language() else ''
+    CALLBACK_URL = settings.HOST_URL + get_lang + settings.PAYTM_CALLBACK_URL
+    # Generating unique temporary ids
+    order_id = Checksum.__id_generator__()
+
+    bill_amount = 100
+    if bill_amount:
+        data_dict = {
+                    'MID':MERCHANT_ID,
+                    'ORDER_ID':order_id,
+                    'TXN_AMOUNT': bill_amount,
+                    'CUST_ID':'harish@pickrr.com',
+                    'INDUSTRY_TYPE_ID':'Retail',
+                    'WEBSITE': settings.PAYTM_WEBSITE,
+                    'CHANNEL_ID':'WEB',
+                    #'CALLBACK_URL':CALLBACK_URL,
+                }
+        param_dict = data_dict
+        param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(data_dict, MERCHANT_KEY)
+        return render(request,"payment.html",{'paytmdict':param_dict})
+    return HttpResponse("Bill Amount Could not find. ?bill_amount=10")
+
+
+@csrf_exempt
+def response(request):
+    if request.method == "POST":
+        MERCHANT_KEY = settings.PAYTM_MERCHANT_KEY
+        data_dict = {}
+        for key in request.POST:
+            data_dict[key] = request.POST[key]
+        verify = Checksum.verify_checksum(data_dict, MERCHANT_KEY, data_dict['CHECKSUMHASH'])
+        if verify:
+            PaytmHistory.objects.create(user=request.user, **data_dict)
+            return render(request,"response.html",{"paytm":data_dict})
+        else:
+            return HttpResponse("checksum verify failed")
+    return HttpResponse(status=200)

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 import string
 import random
 from django.utils.text import slugify
+from accounts.models import *
 
 # Create your models here.
 
@@ -11,37 +12,6 @@ status_choices = [
     ('t', 'Teacher'),
     ('s', 'Student')
 ]
-
-class College(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return self.name
-
-colleges = College.objects.all()
-
-college_choice = []
-
-for college in colleges:
-    college_choice.append((college.name, college.name))
-
-def generate_profile_code():
-    length=6
-    while True:
-        code = ''.join(random.choices(string.ascii_lowercase,k=length))
-        if Profile.objects.filter(slug=code).count()==0:
-            break
-    return code
-
-class Profile(models.Model):
-    img = models.ImageField(upload_to='UserImg', null=True, blank=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    status = models.CharField(choices=status_choices, max_length=5, default='s')
-    college = models.CharField(max_length=100)
-    slug = models.CharField(default=generate_profile_code, max_length=50)
-
-    def __str__(self) -> str:
-        return self.user.username + '-' + self.status
 
 class GeneralAnouncement(models.Model):
     title = models.CharField(max_length=50, null=False)

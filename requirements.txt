@@ -1,0 +1,15 @@
+backports.shutil-get-terminal-size 
+decorator 
+Django 
+enum34 
+ipython-genutils 
+pathlib2 
+pexpect 
+pickleshare 
+prompt-toolkit 
+ptyprocess 
+Pygments 
+simplegeneric 
+six 
+traitlets 
+wcwidth 

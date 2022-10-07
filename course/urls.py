@@ -4,11 +4,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .views.course import *
 from .views.creator_form import *
+import accounts.views as acc_views
 
 urlpatterns = [
     path('', home, name='home'),
     path('lms/', lms, name='lms'),
-    path('signup', handlesignup, name='handlesignup'),
+    path('signup', acc_views.RegistrationView.as_view(), name='handlesignup'),
     path('logout/', handlelogout, name='handlelogout'),
     path('login', handlelogin, name='handlelogin'),
     path('teacher_signup', handleteachersignup, name='teacher-signup'),
