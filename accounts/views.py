@@ -1,4 +1,5 @@
 from decimal import Context
+from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
@@ -329,13 +330,12 @@ class RegistrationView(View):
             if not User.objects.filter(email=email).exists():
                 if len(password) < 6:
                     messages.error(request, 'Password is too short')
-                    return render(request, 'register.html')
+                    return redirect('handlesignup')
 
                 user = User.objects.create_user(username=username, email=email)
                 user.set_password(password)
-                user.is_active = False
                 user.save()
-                user = authenticate(username=username, password=pass1)
+                user = authenticate(username=username, password=password)
                 if user is not None:
                     login(request, user)
                     messages.success(request, "Successfully logged in")

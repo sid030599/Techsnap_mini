@@ -143,3 +143,9 @@ MESSAGE_TAGS = {
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+
+# PayTm Payment details
+
+PAYTM_MERCHANT_KEY = "hU7us5IlcMezuw50"
+PAYTM_MERCHANT_ID = "osSbfs65930872265966"
+PAYTM_WEBSITE = 'WEBSTAGING'

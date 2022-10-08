@@ -139,7 +139,8 @@ def handlelogin(request):
             login(request, user)
             messages.success(request, "Successfully logged in")
             return redirect('home')
-        elif user_verify.is_active == False:
+        elif not user_verify.is_active:
+            print("fd")
             messages.error(request, "Please verify your email first to login.")
             return redirect('home')
         else:
@@ -162,16 +163,15 @@ def course_list(request):
     return render(request, 'courses/index.html', {'courses': cr_list})
 
 def course_description(request, slug):
-    profile = Profile.objects.get(user=request.user)
-    user = profile
+    user = Profile.objects.get(user=request.user)
     enrolled = False
     course = Course.objects.get(slug__iexact=slug)
     description = Description.objects.filter(course=course).first()
     what_u_get = WhatYouGet.objects.filter(description=description)
     testimonials = Testimonial.objects.filter(course=course)
     faqs = FrequentlyAskedQuestion.objects.filter(course=course)
-    """if len(UserCourseMap.objects.filter(course=course, user=user))>0:
-        enrolled = True"""
+    if len(UserCourseMap.objects.filter(course=course, user=user))>0:
+        enrolled = True
         
     units = Unit.objects.filter(course=course)
     contents = []
@@ -213,7 +213,7 @@ def enroll_in_course(request, slug):
     # Enrollement
     if len(UserCourseMap.objects.filter(user=user, course=course))==0:
         user_course_map = UserCourseMap.objects.create(user=user, course=course)
-    lesson_slug = "no-slug"
+    #lesson_slug = "no-slug"
     update_userlesson_completion(course, user)
     
     lesson = Lesson.objects.filter(unit__course=course).first()
@@ -230,7 +230,7 @@ def enroll_in_course(request, slug):
     log = f" LOGGED IN to Course [{course.course_title}]"
     EnrollmentHistory.objects.create(user=user, log=log, course=course)
 
-    return redirect('lesson-view', slug=lesson_slug, course_slug=course.slug)
+    return render(request, "payment/payment-success.html", {"course":course})
 
 def update_userlesson_completion(course, user):
     id_list = []
@@ -462,46 +462,104 @@ def lesson_timer_update(request, pk):
 from django.utils.translation import get_language
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
-from course import Checksum
+from course import PaytmChecksum
 from accounts.models import PaytmHistory
+import json
+import requests
 
-def payment(request):
+
+def payment(request, slug):
+    bill_amount = 0
+    if slug!="paytm_log":
+        course = Course.objects.get(slug=slug)
+        bill_amount = course.course_price
     MERCHANT_KEY = settings.PAYTM_MERCHANT_KEY
+    ENV = "https://securegw-stage.paytm.in"
     MERCHANT_ID = settings.PAYTM_MERCHANT_ID
     get_lang = "/" + get_language() if get_language() else ''
-    CALLBACK_URL = settings.HOST_URL + get_lang + settings.PAYTM_CALLBACK_URL
+    CALLBACK_URL = "http://127.0.0.1:8000/response/"+slug
     # Generating unique temporary ids
-    order_id = Checksum.__id_generator__()
+    
+    if bill_amount != "FREE":
+        order_id = "order_"+str(datetime.datetime.now().timestamp())
+        paytmParams = dict()
+        paytmParams["body"] = {
+            "requestType"   : "Payment",
+            "mid"           : MERCHANT_ID,
+            "websiteName"   : "WEBSTAGING",
+            "orderId"       : order_id,
+            "callbackUrl"   : CALLBACK_URL,
+            "txnAmount"     : {
+                "value"     : str(float(bill_amount)),
+                "currency"  : "INR",
+            },
+            "userInfo"      : {
+                "custId"    : "CUST_001",
+            },
+        }
+        # Generate checksum by parameters we have in body
+        # Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys 
+        checksum = PaytmChecksum.generateSignature(json.dumps(paytmParams["body"]), MERCHANT_KEY)
+        paytmParams["head"] = {
+            "signature"    : checksum
+        }
+        post_data = json.dumps(paytmParams)
+        # for Staging
+        url = "https://securegw-stage.paytm.in/theia/api/v1/initiateTransaction?mid="+MERCHANT_ID+"&orderId="+order_id
+        # for Production
+        # url = "https://securegw.paytm.in/theia/api/v1/initiateTransaction?mid=YOUR_MID_HERE&orderId=ORDERID_98765"
+        response = requests.post(url, data = post_data, headers = {"Content-type": "application/json"}).json()
+        response_str = json.dumps(response)
+        res = json.loads(response_str)
+        if res["body"]["resultInfo"]["resultStatus"]=='S':
+            token=res["body"]["txnToken"]
+        else:
+            token=""
+        
+        profile = Profile.objects.get(user=request.user)
+        user = profile
+        course = Course.objects.filter(slug__iexact=slug).first()
+        lessons = Lesson.objects.filter(unit__course=course)
+        price = bill_amount
 
-    bill_amount = 100
-    if bill_amount:
-        data_dict = {
-                    'MID':MERCHANT_ID,
-                    'ORDER_ID':order_id,
-                    'TXN_AMOUNT': bill_amount,
-                    'CUST_ID':'harish@pickrr.com',
-                    'INDUSTRY_TYPE_ID':'Retail',
-                    'WEBSITE': settings.PAYTM_WEBSITE,
-                    'CHANNEL_ID':'WEB',
-                    #'CALLBACK_URL':CALLBACK_URL,
-                }
-        param_dict = data_dict
-        param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(data_dict, MERCHANT_KEY)
-        return render(request,"payment.html",{'paytmdict':param_dict})
-    return HttpResponse("Bill Amount Could not find. ?bill_amount=10")
+        data = {
+            'slug': course.slug,
+            'title': course.course_title,
+            'img': course.course_img,
+            'lessons': len(lessons),
+            'price': course.course_price,
+            "txnToken": token,
+            "orderId": order_id,
+            "amount": 1,
+            "env": ENV,
+            "mid": MERCHANT_ID
+        }
+
+        return render(request, "payment/payment.html", data)
+    return redirect('course-enrollment', slug=slug)
 
 
 @csrf_exempt
-def response(request):
+def response(request, slug):
     if request.method == "POST":
-        MERCHANT_KEY = settings.PAYTM_MERCHANT_KEY
-        data_dict = {}
-        for key in request.POST:
-            data_dict[key] = request.POST[key]
-        verify = Checksum.verify_checksum(data_dict, MERCHANT_KEY, data_dict['CHECKSUMHASH'])
-        if verify:
-            PaytmHistory.objects.create(user=request.user, **data_dict)
-            return render(request,"response.html",{"paytm":data_dict})
-        else:
-            return HttpResponse("checksum verify failed")
+        data = {k:v[0] for k,v in dict(request.POST).items()}
+        print(data)
+        if data:
+            checksum = data['CHECKSUMHASH']
+            data.pop('CHECKSUMHASH', None)
+
+            #verify checksum    
+            verifySignature = PaytmChecksum.verifySignature(data, settings.PAYTM_MERCHANT_KEY, checksum)
+            text_error = ''
+            text_success = ''
+
+            if verifySignature:
+                text_success = "Checksum is verified.Transaction details are below"
+                PaytmHistory.objects.create(user=request.user)
+                return redirect('course-enrollment', slug=slug)
+            else:
+                text_error = "Checksum is not verified."
+                return HttpResponse("checksum verify failed")
+        else :
+            text_error = "Empty POST Response."
     return HttpResponse(status=200)

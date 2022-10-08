@@ -15,7 +15,7 @@ urlpatterns = [
     path('teacher_signup', handleteachersignup, name='teacher-signup'),
 
     path('courses/', course_list, name='course-list'),
-    path('payment/<str:slug>', CoursePaymentView.as_view(), name='course-payment'),
+    #path('payment/<str:slug>', CoursePaymentView.as_view(), name='course-payment'),
     path('course/<str:slug>', course_description, name='course-description'),
     path('enroll/<str:slug>', enroll_in_course, name='course-enrollment'),
     path('exit-course/<str:slug>', log_out_course, name='exit-course'),
@@ -53,6 +53,9 @@ urlpatterns = [
     path('logs/<str:slug>/<str:username>', get_history, name='get-user-course-history'),
     # timer update 
     path('timer-update/<int:pk>', lesson_timer_update, name='lesson-timer-update'),
+    # payment
+    path('payment/<str:slug>', payment, name='make-payment'),
+    path('response/<str:slug>', response, name='response'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
