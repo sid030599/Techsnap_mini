@@ -1,26 +1,53 @@
 <!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/announcements-style.css">
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="icon" type="image/x-icon" href="rsc/icons8-project-management-48.png">
-    <title>Units</title>
+    <link rel="stylesheet" href="{% static "styles/announcements-style.css"%}">
+    <link rel="stylesheet" href="{% static "styles/style.css"%}">
+    <link rel="stylesheet" href="{% static "css/w3.css"%}">
+    <link rel="stylesheet" href="{% static "styles/courses-style.css"%}">
+    <link rel="stylesheet" href="{% static "styles/add-popup.css"%}">
+    <link rel="icon" type="image/x-icon" href="{% static "rsc/icons8-project-management-48.png"%}">
+    <title>Unit</title>
 </head>
 <body>
+    <div id="add_course" class="add-course">
+        <form class='popup w3-border w3-round-large' enctype='multipart/form-data' method='POST' action="{% url 'update-unit' unit.course.slug unit.slug %}">
+            <div class="left">
+                <div class="left-cont">
+                    <img src="{% static "rsc/icons8-project-management-48.png"%}" alt="">
+                    <h3>Create new Course</h3>
+                    <div class="left-item ac-btn">
+                        <button type="submit" class="a">Create</button>
+                        <button class="cancel" type="button">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="right-cont">
+                    <div class='right-item'>
+                        {% csrf_token %}
+                        {{ lesson_form|crispy }}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="notification-list-container noti-notdisplay">
         <div class="notification-list">
             <div class="notification-heading">
                 <h3>Notifications</h3>
-                <img src="rsc/icons8-expand-50.png" alt="" class="expand">
+                <img src="{% static "rsc/icons8-expand-50.png"%}" alt="" class="expand">
             </div>
             <div class="notifications">
                 <div class="notification">
                     <div class="noti-details">
                         <div class="noti-image">
-                            <img src="rsc/paul-castanie-WZB_ZOqR4dA-unsplash.jpg" alt="">
+                            <img src="{% static "rsc/paul-castanie-WZB_ZOqR4dA-unsplash.jpg"%}" alt="">
                         </div>
                         <div class="noti-detail">
                             <p class="det">Paul updated the syllabus for Python</p>
@@ -31,7 +58,7 @@
                 <div class="notification">
                     <div class="noti-details">
                         <div class="noti-image">
-                            <img src="rsc/joshua-earle-ICE__bo2Vws-unsplash.jpg" alt="">
+                            <img src="{% static "rsc/joshua-earle-ICE__bo2Vws-unsplash.jpg"%}" alt="">
                         </div>
                         <div class="noti-detail">
                             <p class="det">Josh assigned a test for you</p>
@@ -42,7 +69,7 @@
                 <div class="notification">
                     <div class="noti-details">
                         <div class="noti-image">
-                            <img src="rsc/radu-florin-4_QFycgpC4c-unsplash.jpg" alt="">
+                            <img src="{% static "rsc/radu-florin-4_QFycgpC4c-unsplash.jpg"%}" alt="">
                         </div>
                         <div class="noti-detail">
                             <p class="det">Jim added you to python classroom</p>
@@ -58,19 +85,23 @@
         <div class="profile">
             <div class="user-info profile-item">
                 <div class="user-image">
-                    <img src="rsc/kristina-v-hYdikKrex4U-unsplash.jpg" alt="">
+                    {% if creator.user.img %}
+                    <img src="{{creator.user.img.url}}" alt="">
+                    {% else %}
+                    <img src="{% static "rsc/kristina-v-hYdikKrex4U-unsplash.jpg"%}" alt="">
+                    {% endif %}
                 </div>
                 <div class="user-details">
-                    <p class="user-fullname">Emily Rose</p>
-                    <p class="user-name">@rose_emily003</p>
+                    <p class="user-fullname">{{creator.user.fullname}}</p>
+                    <p class="user-name">@{{creator.user.username}}</p>
                 </div>
             </div>
             <div class="settings profile-item">
-                <img src="rsc/icons8-settings-48.png" alt="">
+                <img src="{% static "rsc/icons8-settings-48.png"%}" alt="">
                 <p>Account Settings</p>
             </div>
             <div class="logout profile-item">
-                <img src="rsc/icons8-logout-48.png" alt="">
+                <img src="{% static "rsc/icons8-logout-48.png"%}" alt="">
                 <p>Logout</p>
             </div>
         </div>
@@ -79,70 +110,46 @@
         <div class="side-panel">
             <div class="panel-item logo-item">
                 <div class="logo">
-                    <img src="rsc/icons8-project-management-48.png" alt="" class="logo-image">
+                    <img src="{% static "rsc/icons8-project-management-48.png"%}" alt="" class="logo-image">
                     <p class="logo-name">managesnap</p>
                 </div>
                 <img src="rsc/icons8-close-30 (1).png" alt="" id="close">
             </div>
             <div class="dashboard panel-item">
-                <img src="rsc/icons8-dashboard-layout-48.png" alt="" class="item">
+                <img src="{% static "rsc/icons8-dashboard-layout-48.png"%}" alt="" class="item">
                 <p class="name"><a href="">Dashboard</a></p>
             </div>
             <div class="courses panel-item">
-                <img src="rsc/icons8-e-learning-48.png" alt="" class="item">
+                <img src="{% static "rsc/icons8-e-learning-48.png"%}" alt="" class="item">
                 <p class="name"><a href="index.html">Courses</a></p>
             </div>
             <div class="requests panel-item">
-                <img src="rsc/icons8-request-service-48.png" alt="" class="item">
+                <img src="{% static "rsc/icons8-request-service-48.png"%}" alt="" class="item">
                 <p class="name"><a href="requests.html">Requests</a></p>
             </div>
             <div class="groups panel-item">
-                <img src="rsc/icons8-user-groups-48.png" alt="" class="item">
+                <img src="{% static "rsc/icons8-user-groups-48.png"%}" alt="" class="item">
                 <p class="name"><a href="groups.html">Groups</a></p>
             </div>
             <div class="course-details panel-item">
                 <div class="panel-heading">
                     <h3>Course Details</h3>
-                    <img src="rsc/icons8-chevron-down-30.png" alt="" class="down" id="arrow">
+                    <img src="{% static "rsc/icons8-chevron-down-30.png"%}" alt="" class="down" id="arrow">
                 </div>
                 <div class="details">
                     <div class="detail announcements">
-                        <img src="rsc/icons8-commercial-48.png" alt="" class="item">
+                        <img src="{% static "rsc/icons8-commercial-48.png"%}" alt="" class="item">
                         <p class="name"><a href="announcements.html">Announcements</a></p>
                     </div>
-                    <div class="detail timetable">
-                        <img src="rsc/icons8-calendar-48.png" alt="" class="item">
-                        <p class="name"><a href="timetable.html">Timetable</a></p>
-                    </div>
-                    <div class="detail syllabus">
-                        <img src="rsc/icons8-google-classroom-48.png" alt="" class="item">
-                        <p class="name"><a href="syllabus.html">Syllabus</a></p>
-                    </div>
-                    <div class="detail assignment">
-                        <img src="rsc/icons8-audit-48.png" alt="" class="item">
-                        <p class="name"><a href="assignment.html">Assignment</a></p>
-                    </div>
-                    <div class="detail caesum">
-                        <img src="rsc/icons8-read-online-48.png" alt="" class="item">
-                        <p class="name"><a href="caesum.html">Caesum</a></p>
-                    </div>
-                    <div class="detail exams">
-                        <img src="rsc/icons8-hand-with-pen-48.png" alt="" class="item">
-                        <p class="name"><a href="exams.html">Exams</a></p>
-                    </div>
-                    <div class="detail quiz">
-                        <img src="rsc/icons8-help-48.png" alt="" class="item">
-                        <p class="name"><a href="quiz.html">Quiz</a></p>
-                    </div>
                     <div class="detail units">
-                        <img src="rsc/icons8-unit-48.png" alt="" class="item">
+                        <img src="{% static "rsc/icons8-unit-48.png"%}" alt="" class="item">
                         <p class="name"><a href="units.html">Units</a></p>
                     </div>
                 </div>
             </div>
             <div class="panel-item support">
                 <button>
-                    <img src="rsc/icons8-support-60.png" alt="">
+                    <img src="{% static "rsc/icons8-support-60.png"%}" alt="">
                     <p>Get Support</p>
                 </button>
             </div>
@@ -151,16 +158,16 @@
     <div class="navigation">
         <div class="navi">
             <div class="nav-logo">
-                <img src="rsc/icons8-menu-50.png" alt="" id="menu" class="nav-logo-item">
-                <img src="rsc/icons8-project-management-48.png" alt="" class="nav-logo-item nav-logo-image">
+                <img src="{% static "rsc/icons8-menu-50.png"%}" alt="" id="menu" class="nav-logo-item">
+                <img src="{% static "rsc/icons8-project-management-48.png"%}" alt="" class="nav-logo-item nav-logo-image">
                 <p class="nav-logo-item nav-logo-text">managesnap</p>
             </div>
             <div class="nav-rest">
                 <div class="nav-item">
-                    <img src="rsc/icons8-notification-48 (1).png" alt="" class="noti-icon">
+                    <img src="{% static "rsc/icons8-notification-48 (1).png"%}" alt="" class="noti-icon">
                 </div>
                 <div class="profile-image nav-item">
-                    <img src="rsc/kristina-v-hYdikKrex4U-unsplash.jpg" alt="" class="image">
+                    <img src="{% static "rsc/kristina-v-hYdikKrex4U-unsplash.jpg"%}" alt="" class="image">
                 </div>
             </div>
         </div>
@@ -171,77 +178,52 @@
                 <div class="heading ann-item">
                     <div class="head heading-item">
                         <p class="heading-name">
-                            Units
+                            {{unit.title}}
                         </p>
                     </div>
                     <div class="add-search ann-item heading-item">
                         <div class="search as-item">
                             <input type="text" name="" id="" placeholder="search" class="search-item searchbar">
-                            <img src="rsc/icons8-search-50 (4).png" alt="" class="search-icon search-item">
+                            <img src="{% static "rsc/icons8-search-50 (4).png"%}" alt="" class="search-icon search-item">
                         </div>
-                        <div class="add as-item">
-                            <button class="add-btn"><p>Add</p></button>
+                        <div class="filter fs-item">
+                            <button class="filter-btn" id="add-course-btn">Add</button>
                         </div>
                     </div>
                 </div>
                 <div class="tabs ann-item">
                     <div class="tab rel current">
-                        <img src="rsc/icons8-sent-50.png" alt="" class="icon">
+                        <img src="{% static "rsc/icons8-sent-50.png"%}" alt="" class="icon">
                         <p>Released</p>
-                    </div>
-                    <div class="tab dra not-current">
-                        <img src="rsc/icons8-draft-48.png" alt="" class="icon">
-                        <p>Drafts</p>
                     </div>
                 </div>
                 <div class="ann-item released-container">
+                    {% for lesson in lessons %}
                     <div class="released">
                         <div class="ann-content">
-                            <h3 class="ann-heading rd-item">Announcement-1</h3>
-                            <p class="ann-para rd-item">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, debitis. Inventore rerum tempore ut, perferendis id autem quos aut esse, minus, incidunt magnam labore dolore.....</p>
+                            <h3 class="ann-heading rd-item">{{lesson.title}}</h3>
                             <div class="ann-links-docs rd-item">
-                                <div class="links">
-                                    <img src="rsc/icons8-link-24 (1).png" alt="" class="icon">
-                                    <p class="link-num">Links : 3</p>
-                                </div>
-                                <div class="docs">
-                                    <img src="rsc/icons8-documents-24.png" alt="" class="icon">
-                                    <p class="docs-num">Documents : 3</p>
-                                </div>
+                                <a href="{{lesson.resource_link}}" class="links">
+                                    <img src="{% static "rsc/icons8-link-24 (1).png"%}" alt="" class="icon">
+                                    <p class="link-num w3-text-grey">Links</p>
+                                </a>
+                                <a href="{{lesson.resource}}" class="docs">
+                                    <img src="{% static "rsc/icons8-documents-24.png"%}" alt="" class="icon">
+                                    <p class="docs-num w3-text-grey">Documents</p>
+                                </a>
                             </div>
                         </div>
                         <div class="ann-buttons">
-                            <button class="view"><a href="view.html">View</a></button>
                             <button class="edit"><a href="view.html">Edit&nbsp;</a></button>
                         </div>
                     </div>
-                </div>
-                <div class="ann-item drafts-container">
-                    <div class="drafts">
-                        <div class="ann-content">
-                            <h3 class="ann-heading rd-item">Lorem ipsum</h3>
-                            <p class="ann-para rd-item">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, debitis. Inventore rerum tempore ut, perferendis id autem quos aut esse, minus, incidunt magnam labore dolore.....</p>
-                            <div class="ann-links-docs rd-item">
-                                <div class="links">
-                                    <img src="rsc/icons8-link-24 (1).png" alt="" class="icon">
-                                    <p class="link-num">Links : 2</p>
-                                </div>
-                                <div class="docs">
-                                    <img src="rsc/icons8-documents-24.png" alt="" class="icon">
-                                    <p class="docs-num">Documents : 1</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ann-buttons">
-                            <button class="view"><a href="view.html">View</a></button>
-                            <button class="edit"><a href="view.html">Edit&nbsp;</a></button>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
-    <script src="scripts/script.js"></script>
-    <script src="scripts/announcements-script.js"></script>
+    <script src="{% static "scripts/script.js"%}"></script>
+    <script src="{% static "scripts/announcements-script.js"%}"></script>
+    <script src="{% static "scripts/add-course.js"%}"></script>
 </body>
 </html>

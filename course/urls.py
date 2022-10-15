@@ -15,7 +15,7 @@ urlpatterns = [
     path('teacher_signup', handleteachersignup, name='teacher-signup'),
 
     path('courses/', course_list, name='course-list'),
-    #path('payment/<str:slug>', CoursePaymentView.as_view(), name='course-payment'),
+    # path('payment/<str:slug>', CoursePaymentView.as_view(), name='course-payment'),
     path('course/<str:slug>', course_description, name='course-description'),
     path('enroll/<str:slug>', enroll_in_course, name='course-enrollment'),
     path('exit-course/<str:slug>', log_out_course, name='exit-course'),
@@ -24,6 +24,9 @@ urlpatterns = [
     # Creator Form urls 
     path('creators-panel/<str:code>', course_form, name='admin-panel'),
     path('creators-panel/course-desc-form/<str:slug>', course_desc_form, name='course-desc-form'),
+    path('creators-panel/course-desc-form/testimonials/<str:slug>', testiomonials_page, name='testimonials'),
+    path('creators-panel/course-desc-form/announcements/<str:slug>', update_course_info, name='announcements'),
+
     # Course Stats page
     path('creators-panel/course-stats/<str:slug>', stats_page, name='course-stats'),
     # Lesson Stats page

@@ -29,3 +29,37 @@ cancel_icon.addEventListener("click", () => {
     panel.style.filter = "none"
     document.body.style.position = "relative"
 })
+
+
+
+var add_edit_btn = document.getElementById('add-edit-btn')
+var add_edit = document.getElementsByClassName('add-edit')[0]
+var body = document.getElementsByClassName('body')[0]
+var navi = document.getElementsByClassName("navigation")[0]
+var cancel_btn = document.getElementsByClassName('cancel')[0]
+var cancel_icon = document.getElementsByClassName('cancel-icon')[0]
+var panel = document.getElementsByClassName("side-panel-container")[0]
+
+add_edit_btn.addEventListener("click", () => {
+    add_edit.style.display = "block"
+    body.style.filter = "blur(10px)"
+    navi.style.filter = "blur(10px)"
+    panel.style.filter = "blur(10px)"
+    document.body.style.position = "fixed"
+})
+
+cancel_btn.addEventListener("click", () => {
+    add_edit.style.display = "none"
+    body.style.filter = "none"
+    navi.style.filter = "none"
+    panel.style.filter = "none"
+    document.body.style.position = "relative"
+})
+
+cancel_icon.addEventListener("click", () => {
+    add_edit.style.display = "none"
+    body.style.filter = "none"
+    navi.style.filter = "none"
+    panel.style.filter = "none"
+    document.body.style.position = "relative"
+})

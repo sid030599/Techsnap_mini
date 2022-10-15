@@ -60,18 +60,18 @@ def update_course_info(request, slug):
 
             anouncements = Anouncement.objects.filter(course=course)
             anouncement_form = AnouncementForm()
-
+            """
             faq_objs = FrequentlyAskedQuestion.objects.filter(course=course)
-            faq_form = FrequentlyAskedQuestionForm()
+            faq_form = FrequentlyAskedQuestionForm()"""
 
             data = {
+                'course': course,
                 'slug': course.slug,
                 'anouncements': anouncements,
                 'form': anouncement_form,
-                'faqs': faq_objs,
-                'faq_form': faq_form
+                "creator": profile
             }
-            return render(request, "course/creator_form/update_course_info.html", data)
+            return render(request, "teacher/announcements.html", data)
         return redirect('')
 
 def course_desc_form(request, slug):
@@ -131,6 +131,44 @@ def course_desc_form(request, slug):
         return redirect('')
 
 
+def testiomonials_page(request, slug):
+    code = Course.objects.get(slug=slug).instructor.slug
+    profile = Profile.objects.get(slug=code)
+    if request.method == 'GET':
+        if profile.is_creator:
+            # course
+            course = Course.objects.filter(slug__iexact=slug).first()
+            # rating 
+            rating = Rating.objects.filter(course=course)
+            rating_form = RatingForm()
+            if rating.exists():
+                rating_update_form = RatingForm(instance=rating.first())
+            else :
+                rating_update_form = None
+            # testimonial 
+            testimonial_objs = Testimonial.objects.filter(course=course)
+            testimonial_form = TestimonialForm()
+            testimonials = []
+            for testimonial in testimonial_objs:
+                data = {
+                    'name': testimonial.name,
+                    'id': testimonial.id,
+                    "thoughts": testimonial.thoughts,
+                    "img": testimonial.image.url
+                }
+                testimonials.append(data)
+
+            payload = {
+                'course': course,
+                'testimonials': testimonials,
+                # Forms
+                'testimonial_form': testimonial_form,
+                'creator': profile
+            }
+
+            return render(request, "teacher/testimonials.html", payload)
+        return redirect('')
+
 # Delete views 
 
 def delete_course(request, slug):
@@ -182,8 +220,9 @@ def create_obj(request, slug, obj):
                 unit.course = course
                 unit.save()
                 return redirect('course-desc-form', slug=slug)
+            print(form.errors)
             
-        elif obj=='anouncement':
+        elif obj=='announcement':
             form = AnouncementForm(request.POST, request.FILES)
             if form.is_valid():
                 anouncement = form.save(commit=False)
@@ -191,6 +230,7 @@ def create_obj(request, slug, obj):
                 anouncement.instructor = profile
                 anouncement.save()
                 return redirect('update-course-info', slug=slug)
+            print("form.errors")
             
         elif obj=='review':
             form = ReviewForm(request.POST, request.FILES)
@@ -199,6 +239,7 @@ def create_obj(request, slug, obj):
                 review.course = course
                 review.save()
                 return redirect('course-desc-form', slug=slug)
+            print(form.errors)
             
         elif obj=='testimonial':
             form = TestimonialForm(request.POST, request.FILES)
@@ -207,6 +248,7 @@ def create_obj(request, slug, obj):
                 testimonial.course = course
                 testimonial.save()
                 return redirect('course-desc-form', slug=slug)
+            print(form.errors)
             
         elif obj=='faq':
             form = FrequentlyAskedQuestionForm(request.POST, request.FILES)
@@ -215,6 +257,7 @@ def create_obj(request, slug, obj):
                 faq.course = course
                 faq.save()
                 return redirect('update-course-info', slug=slug)
+            print(form.errors)
             
         elif obj=='description':
             form = DescriptionForm(request.POST, request.FILES)
@@ -223,6 +266,7 @@ def create_obj(request, slug, obj):
                 desc.course = course
                 desc.save()
                 return redirect('course-desc-form', slug=slug)
+            print(form.errors)
             
         elif obj=='rating':
             form = RatingForm(request.POST, request.FILES)
@@ -231,7 +275,7 @@ def create_obj(request, slug, obj):
                 rating.course = course
                 rating.save()
                 return redirect('course-desc-form', slug=slug)
-        print(form.errors)
+            print(form.errors)
         return redirect('course-desc-form', slug=slug)
     return redirect('course-desc-form', slug=slug)
 
@@ -375,7 +419,7 @@ def update_unit(request, slug, unit_slug):
             'lesson_form': lesson_form,
             'lessons': lessons
         }
-        return render(request, 'course/creator_form/unit_lesson.html', data)
+        return render(request, 'teacher/units.html', data)
 
 def hr_panel(request):
     profile = Profile.objects.get(user=request.user)

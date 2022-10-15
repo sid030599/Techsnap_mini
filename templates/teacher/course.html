@@ -14,15 +14,15 @@
     <title>Courses</title>
 </head>
 <body>
-    <div class="add-course">
-        <form class='popup w3-border w3-round-large' enctype='multipart/form-data' method='POST' action="{% url 'admin-panel' creator.slug %}">
+    <div id="add_course" class="add-course">
+        <form class='popup w3-border w3-round-large' enctype='multipart/form-data' method='POST' action="{% url 'create-obj' course.slug "unit" %}">
             <div class="left">
                 <div class="left-cont">
                     <img src="{% static "rsc/icons8-project-management-48.png"%}" alt="">
                     <h3>Create new Course</h3>
                     <div class="left-item ac-btn">
                         <button type="submit" class="a">Create</button>
-                        <button class="cancel">Cancel</button>
+                        <button class="cancel" type="button">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 <div class="right-cont">
                     <div class='right-item'>
                         {% csrf_token %}
-                        {{ form|crispy }}
+                        {{ unit_form|crispy }}
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
         <div class="notification-list">
             <div class="notification-heading">
                 <h3>Notifications</h3>
-                <img src="rsc/icons8-expand-50.png" alt="" class="expand">
+                <img src="{% static "rsc/icons8-expand-50.png"%}" alt="" class="expand">
             </div>
             <div class="notifications">
                 <div class="notification">
@@ -95,10 +95,10 @@
                 <img src="{% static "rsc/icons8-settings-48.png"%}" alt="">
                 <p>Account Settings</p>
             </div>
-            <div class="logout profile-item">
+            <a href="{% url "handlelogout" %}" class="logout profile-item">
                 <img src="{% static "rsc/icons8-logout-48.png"%}" alt="">
                 <p>Logout</p>
-            </div>
+            </a>
         </div>
     </div>
     <div class="side-panel-container">
@@ -123,36 +123,32 @@
                 <p class="name"><a href="requests.html">Requests</a></p>
             </div>
             <div class="groups panel-item">
-                <img src="rsc/icons8-user-groups-48.png" alt="" class="item">
+                <img src="{% static "rsc/icons8-user-groups-48.png"%}" alt="" class="item">
                 <p class="name"><a href="groups.html">Groups</a></p>
             </div>
             <div class="course-details panel-item">
                 <div class="panel-heading">
                     <h3>Course Details</h3>
-                    <img src="rsc/icons8-chevron-down-30.png" alt="" class="down" id="arrow">
+                    <img src="{% static "rsc/icons8-chevron-down-30.png"%}" alt="" class="down" id="arrow">
                 </div>
                 <div class="details">
                     <div class="detail announcements">
-                        <img src="rsc/icons8-commercial-48.png" alt="" class="item">
-                        <p class="name"><a href="announcements.html">Announcements</a></p>
+                        <img src="{% static "rsc/icons8-commercial-48.png"%}" alt="" class="item">
+                        <p class="name"><a href="{% url "announcements" course.slug%}">Announcements</a></p>
                     </div>
                     <div class="detail timetable">
-                        <img src="rsc/icons8-calendar-48.png" alt="" class="item">
-                        <p class="name"><a href="timetable.html">Testimonials</a></p>
-                    </div>
-                    <div class="detail syllabus">
-                        <img src="rsc/icons8-google-classroom-48.png" alt="" class="item">
-                        <p class="name"><a href="syllabus.html">Units</a></p>
+                        <img src="{% static "rsc/icons8-calendar-48.png"%}" alt="" class="item">
+                        <p class="name"><a href="{% url "testimonials" course.slug%}">Testimonials</a></p>
                     </div>
                     <div class="detail assignment">
-                        <img src="rsc/icons8-audit-48.png" alt="" class="item">
-                        <p class="name"><a href="assignment.html">Reviews</a></p>
+                        <img src="{% static "rsc/icons8-audit-48.png"%}" alt="" class="item">
+                        <p class="name"><a href="#">Reviews</a></p>
                     </div>
                 </div>
             </div>
             <div class="panel-item support">
                 <button>
-                    <img src="rsc/icons8-support-60.png" alt="">
+                    <img src="{% static "rsc/icons8-support-60.png"%}" alt="">
                     <p>Get Support</p>
                 </button>
             </div>
@@ -167,10 +163,10 @@
             </div>
             <div class="nav-rest">
                 <div class="nav-item">
-                    <img src="rsc/icons8-notification-48 (1).png" alt="" class="noti-icon">
+                    <img src="{% static "rsc/icons8-notification-48 (1).png"%}" alt="" class="noti-icon">
                 </div>
                 <div class="profile-image nav-item">
-                    <img src="rsc/kristina-v-hYdikKrex4U-unsplash.jpg" alt="" class="image">
+                    <img src="{% static "rsc/kristina-v-hYdikKrex4U-unsplash.jpg"%}" alt="" class="image">
                 </div>
             </div>
         </div>
@@ -178,12 +174,12 @@
     <div class="body">
         <div class="courses-container">
             <div class="courses-heading course-item">
-                <p class="main">Explore Courses</p>
+                <p class="main">All Units in the course </p>
             </div>
             <div class="filter-search course-item">
                 <div class="search fs-item">
-                    <input type="text" name="" id="" placeholder="search courses" class="search-item searchbar">
-                    <img src="rsc/icons8-search-50 (4).png" alt="" class="search-icon search-item">
+                    <input type="text" name="" id="" placeholder="search units" class="search-item searchbar">
+                    <img src="{% static "rsc/icons8-search-50 (4).png"%}" alt="" class="search-icon search-item">
                 </div>
                 <div class="filter fs-item">
                     <button class="filter-btn" id="add-course-btn">Add</button>
@@ -191,26 +187,22 @@
             </div>
             <div class="courses course-item">
                 <div class="course-sets">
-                    {% for course in courses %}
+                    {% for unit in units %}
                     <div class="course">
-                        <div class="course-banner">
-                            <img src="{{course.course_img.url}}" alt="" class="banner">
-                        </div>
                         <div class="course-details">
                             <div class="course-author cd">
-                                <img src="{{course.instructor.img.url}}" alt="" class="author">
-                                <p>{{course.instructor.user.username}}</p>
+                                <p>{{unit.title}}</p>
                             </div>
-                            <h3 class="course-name cd">{{course.course_title}}</h3>
+                            <p class="course-name cd">{{unit.brief}}</p>
                             <div class="diff-preview cd">
                                 <div class="difficulty">
-                                    <p>{{course.course_level}}</p>
+                                    
                                 </div>
                                 <div class="preview">
-                                    <a href="{% url 'delete-course' course.slug %}">
+                                    <a href="{% url 'delete-unit' unit.id %}">
                                         <button class='w3-button w3-small w3-round w3-red'>Delete</button>
                                     </a>
-                                    <button class="preview-btn">Preview</button>
+                                    <a href="{% url 'update-unit' course.slug unit.slug %}" class="preview-btn">Lessons</a>
                                 </div>
                             </div>
                         </div>
