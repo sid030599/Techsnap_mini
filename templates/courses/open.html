@@ -264,31 +264,30 @@
             </div>
             <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
                 <h2 class="m-0 mb-4"> Highlights </h2>
+                {% for i  in highlights %}
                 <ul class="highlight ps-0">
-                    <li class="tick">Certificate of Completion by IIT-Madras</li>
-                    <li class="tick"> Self Paced – 100% Online Learning</li>
-                    <li class="tick"> Lifetime Access</li>
-                    <li class="tick"> GUVI Forum Support</li>
-                    <li class="tick">Codekata – Gamified coding Arena</li>
+                    <li class="tick">{{i.highlight}}</li>
+                    
                 </ul>
+                {% endfor %}
             </div>
             <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
                 <h2> Who should Enroll </h2>
+                {% for i  in who_should_enroll %}
                 <ul class="ps-0">
-                    <li class="bullet">Beginners with no previous programming experience looking to obtain the skills to get their first programming job.</li>
-                    <li class="bullet">Anyone looking to to build the minimum Python programming skills necessary as a pre- requisites for moving into machine learning, data science, and artificial intelligence.</li>
-                    <li class="bullet">Existing programmers who want to improve their career options by learning the Python programming language.</li>
+                    <li class="bullet">{{i.enroll}}</li>
+                    
                 </ul>
+                {% endfor %}
             </div>
             <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
                 <h2> Job opportunities</h2>
+                {% for i  in job_oppurtunities %}
                 <ul class="ps-0">
-                    <li class="tick">Python Developer</li>
-                    <li class="tick"> Research Analyst</li>
-                    <li class="tick"> Data Analyst</li>
-                    <li class="tick"> Data Scientist</li>
-                    <li class="tick">Software Developer</li>
+                    <li class="tick">{{i.opportunities}}</li>
+                    
                 </ul>
+                {% endfor %}
             </div>
             <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
                 <h2 class> Course Syllabus </h2>
@@ -322,21 +321,24 @@
             </div>
             <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
                 <h2 class> Pre-requisites </h2>
-                <p> No previous coding experience is needed </p>
+                
+                <p> description.prerequisites </p>
+                
             </div>
             <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
                 <h2> Certificate </h2>
                 <div class="d-flex align-items-center justify-content-center flex-column flex-md-row">
                     <div class="col-md-6 col-10 d-flex justify-content-center">
                         <ul class="ps-0">
-                            <li class="tick mb-md-3">IIT-M Certification is available on pay per basis.</li>
-                            <li class="tick mb-md-3">Certificate is generated for every course individually.</li>
-                            <li class="tick mb-md-3">Certificates are auto-generated, once payment has been made</li>
+                            <li class="tick mb-md-3">{{ description.certificate }}</li>
+                            
                         </ul>
                     </div>
+                    {% if description.certificate %}
                     <div class="col-md-6 col-10">
                         <img src="{{description.certificate.url}}" class="w-100" id="certificateImg">
                     </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-11 col-11 soff py-3 mt-3 p-0">
@@ -354,25 +356,9 @@
                     </div>
                 </div>
             </div>
+            
             <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
-                <h2> Why GUVI? </h2>
-                <p>Guvi is an IIT-M , IIM-A incubated company located at IITM Research Park, Chennai. We help students master any programming skills so that they can learn and effectively practise the acquired knowledge and skills necessary to thrive in their career. Our feature includes practicing exercises, instructional videos, and a personalized learning dashboard that empowers learners to study at their own pace.</p>
-            </div>
-            <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
-                <div class="d-inline-flex align-items-center">
-                    <img src="{% static "courses/images/codekata.svg"%}" class="mr-3 ck-img">
-                    <h1 class="codekata-title m-0">CodeKata</h1>
-                    <a href="javascript:void(0);" data-toggle="tooltip">
-                        <img src="{% static "courses/images/guvi-anniversary-icon-new.png"%}" class="w-50 m-3"></a>
-                </div>
-                <div class="d-flex align-items-center justify-content-center flex-column flex-md-row">
-                    <div class="col-md-6 col-10">
-                        <p>Get access to the platform that helps users to practise multiple programs that are curated by the experts from the industry. CodeKata involves the concepts of gamification and personalization with 1000+ problem statements.</p>
-                    </div>
-                    <div class="col-md-6 col-10">
-                        <img src="{% static "courses/images/ck.png"%}" class="w-100" src="images/ck.png" alt="artwork">
-                    </div>
-                </div>
+                
             </div>
             <div class="col-md-7 col-10 soff py-3 mt-3 p-0">
                 <div class="d-inline-flex align-items-center mb-4">

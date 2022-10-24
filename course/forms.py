@@ -37,10 +37,11 @@ class CourseForm(forms.ModelForm):
 class DescriptionForm(forms.ModelForm):
     class Meta:
         model = Description
-        fields = ['title', 'description', 'prerequisites', 'certificate', 'no_of_learners']
+        fields = ('title', 'description', 'prerequisites', 'certificate', 'no_of_learners')
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'title', 'class': 'w3-input w3-border w3-round'}),
-            'course_img': forms.FileInput(attrs={'placeholder': 'certificate of completion', 'class': 'w3-input w3-border w3-round'}),
+            'description': forms.TextInput(attrs={'placeholder': 'description', 'class': 'w3-input w3-border w3-round'}),
+            #'course_img': forms.FileInput(attrs={'placeholder': 'certificate of completion', 'class': 'w3-input w3-border w3-round'}),
             'prerequisites': forms.Textarea(attrs={'placeholder': 'any prerequisites for the course ?', 'class': 'w3-input w3-border w3-round'}),
             'certificate': forms.FileInput(attrs={'placeholder': 'certificate', 'class': 'w3-input w3-border w3-round'}),
             'no_of_learners': forms.NumberInput(attrs={'placeholder': 'no. of learners in techsnap', 'class': 'w3-input w3-border w3-round'}),
@@ -59,6 +60,33 @@ class TestimonialForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'placeholder': 'name', 'class': 'w3-input w3-border w3-round'}),
             'image': forms.FileInput(attrs={'placeholder': 'image', 'class': 'w3-input w3-border w3-round'}),
             'thoughts': forms.Textarea(attrs={'placeholder': 'what do you think about this course ??', 'class': 'w3-input w3-border w3-round'}),
+        }
+
+class HighlightForm(forms.ModelForm):
+    class Meta:
+        model = Highligth
+        fields = ('highlight',)
+        widgets = {
+            'highlight': forms.TextInput(attrs={'placeholder': 'highlights', 'class': 'w3-input w3-border w3-round'}),
+
+            
+        }
+
+class EnrollForm(forms.ModelForm):
+    class Meta:
+        model = WhoShouldEnroll
+        fields = ('enroll',)
+        widgets = {
+            'highlight': forms.TextInput(attrs={'placeholder': '', 'class': 'w3-input w3-border w3-round'}),
+        }
+        
+class JobOppurtunitesForm(forms.ModelForm):
+    class Meta:
+        model = JobOpportunities
+        fields = ('opportunities',)
+        widgets = {
+            'highlight': forms.TextInput(attrs={'placeholder': 'highlights', 'class': 'w3-input w3-border w3-round'}),
+            
         }
 
 class FrequentlyAskedQuestionForm(forms.ModelForm):

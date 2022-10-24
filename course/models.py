@@ -68,7 +68,7 @@ class Description(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     prerequisites = models.CharField(max_length=300)
-    certificate = models.ImageField()
+    certificate = models.ImageField(upload_to="description/" , null=True, blank=True)
     no_of_learners = models.IntegerField(null=True)
 
     def __str__(self):
@@ -89,6 +89,31 @@ class Testimonial(models.Model):
 
     def __str__(self):
         return self.name
+
+class Highligth(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    highlight = models.TextField()
+    
+
+    def __str__(self):
+        return self.highlight
+
+
+class WhoShouldEnroll(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    enroll = models.CharField(max_length = 100)
+    
+
+    def __str__(self):
+        return self.enroll
+
+class JobOpportunities(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    opportunities = models.CharField(max_length = 100)
+    
+
+    def __str__(self):
+        return self.opportunities
 
 class FrequentlyAskedQuestion(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)

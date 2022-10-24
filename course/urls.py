@@ -25,6 +25,14 @@ urlpatterns = [
     path('creators-panel/<str:code>', course_form, name='admin-panel'),
     path('creators-panel/course-desc-form/<str:slug>', course_desc_form, name='course-desc-form'),
     path('creators-panel/course-desc-form/testimonials/<str:slug>', testiomonials_page, name='testimonials'),
+    path('creators-panel/course-desc-form/highlights/<str:slug>', highlights_page, name='highlights'),
+    path('creators-panel/course-desc-form/job_oppurtunities/<str:slug>', job_oppurtunities, name='job_oppurtunities'),
+    path('creators-panel/course-desc-form/description/<str:slug>', description, name='description'),
+    path('creators-panel/course-desc-form/whoshouldenroll/<str:slug>', who_enroll, name='whoshouldenroll'),
+    path('creators-panel/course-desc-form/faq/<str:slug>', faq, name='faq'),
+
+    path('delete-highlight/<int:pk>', delete_highlight ,name='delete-highlight'),
+    path('update-highlight/<str:slug>/<int:pk>', update_highlight, name='update-highlight'),
     path('creators-panel/course-desc-form/announcements/<str:slug>', update_course_info, name='announcements'),
 
     # Course Stats page
@@ -38,6 +46,8 @@ urlpatterns = [
     path('delete-review/<int:pk>', delete_review, name='delete-review'),
     path('delete-testimonial/<int:pk>', delete_testimonial, name='delete-testimonial'),
     path('delete-faq/<int:pk>', delete_faq, name='delete-faq'),
+    path('delete-enroll/<int:pk>', delete_enroll, name='delete-enroll'),
+    path('update-enroll/<str:slug>/<int:pk>', update_enroll, name='update-enroll'),
     path('delete-lesson/<str:slug>', delete_lesson, name='delete-lesson'),
     # Create objects 
     path('create/<str:slug>/<str:obj>', create_obj, name='create-obj'),

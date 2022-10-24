@@ -17,6 +17,10 @@ admin.site.register(Anouncement)
 admin.site.register(Comment)
 admin.site.register(Rating)
 admin.site.register(Review)
+admin.site.register(Highligth)
 admin.site.register(EnrollmentHistory)
+admin.site.register(WhoShouldEnroll)
+admin.site.register(JobOpportunities)
+
 
 

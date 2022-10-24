@@ -13,3 +13,6 @@ simplegeneric
 six 
 traitlets 
 wcwidth 
+pandas
+django-crispy-forms
+django-ckeditor

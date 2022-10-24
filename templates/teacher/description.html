@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "styles/announcements-style.css"%}">
+    <link rel="stylesheet" href="{% static "styles/style.css"%}">
+    <link rel="stylesheet" href="{% static "css/w3.css"%}">
+    <link rel="stylesheet" href="{% static "styles/courses-style.css"%}">
+    <link rel="stylesheet" href="{% static "styles/add-popup.css"%}">
+    <link rel="icon" type="image/x-icon" href="{% static "rsc/icons8-project-management-48.png"%}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Unit</title>
+</head>
+<body>
+    
+    
+    <div class="notification-list-container noti-notdisplay">
+        <div class="notification-list">
+            <div class="notification-heading">
+                <h3>Notifications</h3>
+                <img src="{% static "rsc/icons8-expand-50.png"%}" alt="" class="expand">
+            </div>
+            <div class="notifications">
+                <div class="notification">
+                    <div class="noti-details">
+                        <div class="noti-image">
+                            <img src="{% static "rsc/paul-castanie-WZB_ZOqR4dA-unsplash.jpg"%}" alt="">
+                        </div>
+                        <div class="noti-detail">
+                            <p class="det">Paul updated the syllabus for Python</p>
+                            <p class="time">5 min ago</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="notification">
+                    <div class="noti-details">
+                        <div class="noti-image">
+                            <img src="{% static "rsc/joshua-earle-ICE__bo2Vws-unsplash.jpg"%}" alt="">
+                        </div>
+                        <div class="noti-detail">
+                            <p class="det">Josh assigned a test for you</p>
+                            <p class="time">2 days ago</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="notification">
+                    <div class="noti-details">
+                        <div class="noti-image">
+                            <img src="{% static "rsc/radu-florin-4_QFycgpC4c-unsplash.jpg"%}" alt="">
+                        </div>
+                        <div class="noti-detail">
+                            <p class="det">Jim added you to python classroom</p>
+                            <p class="time">10 days ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="mark">Mark all as read</p>
+        </div>
+    </div>
+    <div class="profile-container prof-notdisplay">
+        <div class="profile">
+            <div class="user-info profile-item">
+                <div class="user-image">
+                    {% if creator.user.img %}
+                    <img src="{{creator.user.img.url}}" alt="">
+                    {% else %}
+                    <img src="{% static "rsc/kristina-v-hYdikKrex4U-unsplash.jpg"%}" alt="">
+                    {% endif %}
+                </div>
+                <div class="user-details">
+                    <p class="user-fullname">{{creator.user.fullname}}</p>
+                    <p class="user-name">@{{creator.user.username}}</p>
+                </div>
+            </div>
+            <div class="settings profile-item">
+                <img src="{% static "rsc/icons8-settings-48.png"%}" alt="">
+                <p>Account Settings</p>
+            </div>
+            <div class="logout profile-item">
+                <img src="{% static "rsc/icons8-logout-48.png"%}" alt="">
+                <p>Logout</p>
+            </div>
+        </div>
+    </div>
+    <div class="side-panel-container">
+        <div class="side-panel">
+            <div class="panel-item logo-item">
+                <div class="logo">
+                    <img src="{% static "rsc/icons8-project-management-48.png"%}" alt="" class="logo-image">
+                    <p class="logo-name">managesnap</p>
+                </div>
+                <img src="rsc/icons8-close-30 (1).png" alt="" id="close">
+            </div>
+            <div class="dashboard panel-item">
+                <img src="{% static "rsc/icons8-dashboard-layout-48.png"%}" alt="" class="item">
+                <p class="name"><a href="">Dashboard</a></p>
+            </div>
+            <div class="courses panel-item">
+                <img src="{% static "rsc/icons8-e-learning-48.png"%}" alt="" class="item">
+                <p class="name"><a href="index.html">Courses</a></p>
+            </div>
+            <div class="requests panel-item">
+                <img src="{% static "rsc/icons8-request-service-48.png"%}" alt="" class="item">
+                <p class="name"><a href="requests.html">Requests</a></p>
+            </div>
+            <div class="groups panel-item">
+                <img src="{% static "rsc/icons8-user-groups-48.png"%}" alt="" class="item">
+                <p class="name"><a href="groups.html">Groups</a></p>
+            </div>
+            <div class="course-details panel-item">
+                <div class="panel-heading">
+                    <h3>Course Details</h3>
+                    <img src="{% static "rsc/icons8-chevron-down-30.png"%}" alt="" class="down" id="arrow">
+                </div>
+                
+            </div>
+            <div class="panel-item support">
+                <button>
+                    <img src="{% static "rsc/icons8-support-60.png"%}" alt="">
+                    <p>Get Support</p>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="navigation">
+        <div class="navi">
+            <div class="nav-logo">
+                <img src="{% static "rsc/icons8-menu-50.png"%}" alt="" id="menu" class="nav-logo-item">
+                <img src="{% static "rsc/icons8-project-management-48.png"%}" alt="" class="nav-logo-item nav-logo-image">
+                <p class="nav-logo-item nav-logo-text">managesnap</p>
+            </div>
+            <div class="nav-rest">
+                <div class="nav-item">
+                    <img src="{% static "rsc/icons8-notification-48 (1).png"%}" alt="" class="noti-icon">
+                </div>
+                <div class="profile-image nav-item">
+                    <img src="{% static "rsc/kristina-v-hYdikKrex4U-unsplash.jpg"%}" alt="" class="image">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body">
+        <div class="announcements-container">
+            <div class="right">
+
+                    <form  method='POST' enctype="multipart/form-data" >
+                   
+                        <div class="right-cont">
+                            <div class='right-item'>
+                                {% csrf_token %}
+                                {{ description_form|crispy }} <br>
+                                <button class="filter-btn" type = "submit" >Add</button>
+                            </div>
+                        </div>
+                    </form>
+            </div>
+            <div class="container w-50">
+                <ul class="list-group">
+                    <li class="list-group-item active text-center font-weight-bold">Highlights </li>
+                    {% for high in descriptions %}
+                    <li class="list-group-item text-center">{{ high.description }}</li>
+                {% endfor %}
+                </ul>
+                <ul class="list-group">
+                    <li class="list-group-item active text-center font-weight-bold">prerequisites </li>
+                    {% for high in descriptions %}
+                    <li class="list-group-item text-center">{{ high.prerequisites }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+        
+                
+
+          
+    </div>
+    <script src="{% static "scripts/script.js"%}"></script>
+    <script src="{% static "scripts/announcements-script.js"%}"></script>
+    <script src="{% static "scripts/add-course.js"%}"></script>
+</body>
+</html>

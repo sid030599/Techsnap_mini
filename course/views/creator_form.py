@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from pygments import highlight
 from course.models import *
 from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth.models import auth, User
@@ -169,7 +170,406 @@ def testiomonials_page(request, slug):
             return render(request, "teacher/testimonials.html", payload)
         return redirect('')
 
+def highlights_page(request, slug):
+    code = Course.objects.get(slug=slug).instructor.slug
+    profile = Profile.objects.get(slug=code)
+    if request.method == 'POST':
+        if profile.is_creator:
+            
+            course = Course.objects.filter(slug__iexact=slug).first()
+            # rating 
+            rating = Rating.objects.filter(course=course)
+            rating_form = RatingForm()
+            if rating.exists():
+                rating_update_form = RatingForm(instance=rating.first())
+            else :
+                rating_update_form = None
+            # highlight 
+            
+           
+            
+            pre_obj = Highligth.objects.filter(course=course)
+            if len(pre_obj)<=4:
+               
+            
+                form = HighlightForm(request.POST, request.FILES)
+                if form.is_valid():
+                   
+                    highlight = form.save(commit=False)
+                    highlight.course = course
+                    highlight.save()
+                
+            highlight_obj = Highligth.objects.filter(course=course)
+            Highligths = []
+            for high in highlight_obj:
+                data = {
+                    'name': high.highlight,
+                    'id':high.id
+                }
+                Highligths.append(data)
+            
+            highlight_form = HighlightForm()
+            payload = {
+                'course': course,
+                'highlights': Highligths,
+                # Forms
+                'highlight_form': highlight_form,
+                'creator': profile
+            }
+            
+
+            
+
+            return render(request, "teacher/highlights.html", payload)
+    print('sad')
+    highlight_form = HighlightForm()
+    course = Course.objects.filter(slug__iexact=slug).first()
+    highlight_obj = Highligth.objects.filter(course=course)
+    Highligths = []
+    for high in highlight_obj:
+        data = {
+            'name': high.highlight,
+            'id':high.id
+        }
+        Highligths.append(data)
+    return render(request, "teacher/highlights.html", {'highlight_form':highlight_form,'highlights':Highligths,'course':course})
+
+def job_oppurtunities(request, slug):
+    code = Course.objects.get(slug=slug).instructor.slug
+    profile = Profile.objects.get(slug=code)
+    if request.method == 'POST':
+        if profile.is_creator:
+            
+            course = Course.objects.filter(slug__iexact=slug).first()
+            # rating 
+            rating = Rating.objects.filter(course=course)
+            rating_form = RatingForm()
+            if rating.exists():
+                rating_update_form = RatingForm(instance=rating.first())
+            else :
+                rating_update_form = None
+            # highlight 
+            
+           
+            
+            pre_obj = JobOpportunities.objects.filter(course=course)
+            if len(pre_obj)<=4:
+               
+            
+                form = JobOppurtunitesForm(request.POST, request.FILES)
+                if form.is_valid():
+                   
+                    highlight = form.save(commit=False)
+                    highlight.course = course
+                    highlight.save()
+                
+            oppurtunities_obj = JobOpportunities.objects.filter(course=course)
+            opportunities = []
+            for high in oppurtunities_obj:
+                data = {
+                    'name': high.opportunities,
+                }
+                opportunities.append(data)
+            
+            form = JobOppurtunitesForm()
+            payload = {
+                'course': course,
+                'opportunities': opportunities,
+                # Forms
+                'oppurtunities_form': form,
+                'creator': profile
+            }
+            
+
+            
+
+            return render(request, "teacher/joboppurtunities.html", payload)
+
+    oppurtunities_form = JobOppurtunitesForm()
+    course = Course.objects.filter(slug__iexact=slug).first()
+    oppurtunities_obj = JobOpportunities.objects.filter(course=course)
+    opportunities = []
+    for high in oppurtunities_obj:
+        data = {
+            'name': high.opportunities,
+            'id':high.id
+        }
+        opportunities.append(data)
+    return render(request, "teacher/joboppurtunities.html", {'oppurtunities_form':oppurtunities_form,'opportunities':opportunities})
+
+def who_enroll(request, slug):
+    code = Course.objects.get(slug=slug).instructor.slug
+    profile = Profile.objects.get(slug=code)
+    if request.method == 'POST':
+        if profile.is_creator:
+            
+            course = Course.objects.filter(slug__iexact=slug).first()
+            # rating 
+            rating = Rating.objects.filter(course=course)
+            rating_form = RatingForm()
+            if rating.exists():
+                rating_update_form = RatingForm(instance=rating.first())
+            else :
+                rating_update_form = None
+            # highlight 
+            
+           
+            
+            pre_obj = WhoShouldEnroll.objects.filter(course=course)
+            if len(pre_obj)<=4:
+               
+            
+                enroll_form = EnrollForm(request.POST, request.FILES)
+                if enroll_form.is_valid():
+                   
+                    highlight = enroll_form.save(commit=False)
+                    highlight.course = course
+                    highlight.save()
+                
+            enroll_form = EnrollForm()
+            course = Course.objects.filter(slug__iexact=slug).first()
+            enroll_obj = WhoShouldEnroll.objects.filter(course=course)
+            enrolls = []
+            for high in enroll_obj:
+                data = {
+                    'enroll': high.enroll,
+                    'id': high.id,
+                }
+                enrolls.append(data)
+            payload = {
+                'course': course,
+                'enrolls': enrolls,
+                
+                # Forms
+                'enroll_form': enroll_form,
+                'creator': profile
+            }
+            
+
+            
+
+            return render(request, "teacher/enroll.html", payload)
+    
+    enroll_form = EnrollForm()
+    course = Course.objects.filter(slug__iexact=slug).first()
+    enroll_obj = WhoShouldEnroll.objects.filter(course=course)
+    enrolls = []
+    
+    for high in enroll_obj:
+        data = {
+            'enroll': high.enroll,
+            'id': high.id,
+            
+        }
+        enrolls.append(data)
+    return render(request, "teacher/enroll.html", {'enroll_form':enroll_form,'enrolls':enrolls,'course':course})
+
+def update_enroll(request, slug,  pk):
+    if request.method == 'POST':
+        
+        course = Course.objects.filter(slug__iexact=slug).first()
+        enroll = WhoShouldEnroll.objects.get(id=pk)
+        form = EnrollForm(request.POST, request.FILES, instance=enroll)
+        form.save()
+        enroll_form = EnrollForm()
+        
+        enroll_obj = WhoShouldEnroll.objects.filter(course=course)
+        enrolls = []
+        for high in enroll_obj:
+            data = {
+                'enroll': high.enroll,
+                'id': high.id,
+                
+            }
+            enrolls.append(data)
+        
+        return render(request, "teacher/enroll.html", {'enroll_form':enroll_form,'enrolls':enrolls,'course':course})
+        
+    else:
+        
+        enroll_form = EnrollForm()
+        course = Course.objects.filter(slug__iexact=slug).first()
+        
+        return render(request, 'obj_update.html', {'enroll_form':enroll_form,'course':course})
+
+def update_highlight(request, slug,  pk):
+    if request.method == 'POST':
+        
+        course = Course.objects.filter(slug__iexact=slug).first()
+        highlight = Highligth.objects.get(id=pk)
+    
+        form = HighlightForm(request.POST, request.FILES, instance=highlight)
+        form.save()
+        highlight_form = HighlightForm()
+        
+        highlight_obj = Highligth.objects.filter(course=course)
+        Highlights = []
+        for high in highlight_obj:
+            data = {
+                'name': high.highlight,
+                'id': high.id,
+                
+            }
+            Highlights.append(data)
+        
+        return render(request, "teacher/highlights.html", {'highlight_form':highlight_form,'highlights':Highlights,'course':course})
+        
+    else:
+        
+        highlight_form = HighlightForm()
+        course = Course.objects.filter(slug__iexact=slug).first()
+        
+        return render(request, 'high_update.html', {'highlight_form':highlight_form,'course':course})
+
+
+def faq(request, slug):
+    code = Course.objects.get(slug=slug).instructor.slug
+    profile = Profile.objects.get(slug=code)
+    if request.method == 'POST':
+        if profile.is_creator:
+            
+            course = Course.objects.filter(slug__iexact=slug).first()
+            # rating 
+            rating = Rating.objects.filter(course=course)
+            rating_form = RatingForm()
+            if rating.exists():
+                rating_update_form = RatingForm(instance=rating.first())
+            else :
+                rating_update_form = None
+            # highlight 
+            
+           
+            
+            pre_obj = FrequentlyAskedQuestion.objects.filter(course=course)
+            if len(pre_obj)<=4:
+               
+            
+                faq_form = FrequentlyAskedQuestionForm(request.POST, request.FILES)
+                if faq_form.is_valid():
+                   
+                    highlight = faq_form.save(commit=False)
+                    highlight.course = course
+                    highlight.save()
+                
+            faq_form = FrequentlyAskedQuestionForm()
+            course = Course.objects.filter(slug__iexact=slug).first()
+            faq_obj = FrequentlyAskedQuestion.objects.filter(course=course)
+            faqs = []
+            for high in faq_obj:
+                data = {
+                    'ques': high.question,
+                    'faq_form':faq_form,
+
+                    'ans':high.answer
+                }
+                faqs.append(data)
+            payload = {
+                'course': course,
+                'faqs': faqs,
+                # Forms
+                'faq_form': faq_form,
+                'creator': profile
+            }
+            
+
+            
+
+            return render(request, "teacher/faq.html", payload)
+   
+    faq_form = FrequentlyAskedQuestionForm()
+    course = Course.objects.filter(slug__iexact=slug).first()
+    faq_obj = FrequentlyAskedQuestion.objects.filter(course=course)
+    faqs = []
+    for high in faq_obj:
+        data = {
+            'ques': high.question,
+            'faq_form':faq_form,
+
+            'ans':high.answer
+        }
+        faqs.append(data)
+    return render(request, "teacher/faq.html", {'faq_form':faq_form,'faqs':faqs})
+
+
 # Delete views 
+def description(request, slug):
+    code = Course.objects.get(slug=slug).instructor.slug
+    profile = Profile.objects.get(slug=code)
+    if request.method == 'POST':
+        if profile.is_creator:
+            
+            course = Course.objects.filter(slug__iexact=slug).first()
+            # rating 
+            rating = Rating.objects.filter(course=course)
+            rating_form = RatingForm()
+            if rating.exists():
+                rating_update_form = RatingForm(instance=rating.first())
+            else :
+                rating_update_form = None
+            # highlight 
+            
+           
+            
+            pre_obj = Description.objects.filter(course=course)
+            if len(pre_obj)<=4:
+               
+            
+                form = DescriptionForm(request.POST, request.FILES)
+                print(form.is_valid())
+                if form.is_valid():
+                    title = form.cleaned_data.get("title")
+                    description = form.cleaned_data.get("description")
+                    prerequisites = form.cleaned_data.get("prerequisites")
+                    certificate = form.cleaned_data.get("certificate")
+                    no_of_learners = form.cleaned_data.get("no_of_learners")
+                    obj = Description.objects.create(
+                        course = course,
+                        title = title,
+                        description = description,
+                        prerequisites = prerequisites,
+                        certificate = certificate,
+                        no_of_learners = no_of_learners
+                    )
+                    obj.save()
+                    print(obj)
+                else:
+                    print(form.errors)
+            description_obj = Description.objects.filter(course=course)
+            print(description_obj)
+            descriptions = []
+            for high in description_obj:
+                data = {
+                    'description': high.description,
+                    'prerequisites':high.prerequisites
+                }
+                descriptions.append(data)
+            
+            form = DescriptionForm()
+            payload = {
+                'course': course,
+                'descriptions': descriptions,
+                # Forms
+                'description_form': form,
+                'creator': profile
+            }
+            
+
+            
+
+            return render(request, "teacher/description.html", payload)
+
+    description_form = DescriptionForm()
+    course = Course.objects.filter(slug__iexact=slug).first()
+    description_obj = Description.objects.filter(course=course)
+    descriptions = []
+    for high in description_obj:
+        data = {
+            'description': high.description,
+            'prerequisites':high.prerequisites,
+        }
+        descriptions.append(data)
+    return render(request, "teacher/description.html", {'description_form':description_form,'descriptions':descriptions})
+
 
 def delete_course(request, slug):
     code = Course.objects.get(slug=slug).instructor.slug
@@ -194,6 +594,16 @@ def delete_review(request, pk):
 def delete_testimonial(request, pk):
     slug = Testimonial.objects.get(id=pk).course.slug
     Testimonial.objects.get(id=pk).delete()
+    return redirect('course-desc-form', slug=slug)
+
+def delete_enroll(request, pk):
+    slug = WhoShouldEnroll.objects.get(id=pk).course.slug
+    WhoShouldEnroll.objects.get(id=pk).delete()
+    return redirect('course-desc-form', slug=slug)
+
+def delete_highlight(request, pk):
+    slug = Highligth.objects.get(id=pk).course.slug
+    Highligth.objects.get(id=pk).delete()
     return redirect('course-desc-form', slug=slug)
 
 def delete_faq(request, pk):
@@ -221,7 +631,7 @@ def create_obj(request, slug, obj):
                 unit.save()
                 return redirect('course-desc-form', slug=slug)
             print(form.errors)
-            
+        
         elif obj=='announcement':
             form = AnouncementForm(request.POST, request.FILES)
             if form.is_valid():
@@ -280,6 +690,7 @@ def create_obj(request, slug, obj):
     return redirect('course-desc-form', slug=slug)
 
 
+
 def update_obj(request, slug, obj, pk):
     if request.method == 'POST':
         if obj=='unit':
@@ -315,6 +726,12 @@ def update_obj(request, slug, obj, pk):
         elif obj=='testimonial':
             testimonial = Testimonial.objects.get(id=pk)
             form = TestimonialForm(request.POST, request.FILES, instance=testimonial)
+            form.save()
+        elif obj=='enroll':
+            enroll = WhoShouldEnroll.objects.get(id=pk)
+            form = EnrollForm(request.POST, request.FILES, instance=enroll)
+            form.save()
+
         elif obj=='faq':
             faq = FrequentlyAskedQuestion.objects.get(id=pk)
             form = FrequentlyAskedQuestionForm(request.POST, request.FILES, instance=faq)
@@ -386,7 +803,7 @@ def update_obj(request, slug, obj, pk):
         'pk': pk
     }
 
-    return render(request, 'course/creator_form/obj_update.html', data)
+    return render(request, 'obj_update.html', data)
     
 def update_unit(request, slug, unit_slug):
     profile = Profile.objects.get(user=request.user)

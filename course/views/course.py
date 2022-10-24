@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from pygments import highlight
 from course.models import *
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import auth, User
@@ -166,9 +167,12 @@ def course_description(request, slug):
     user = Profile.objects.get(user=request.user)
     enrolled = False
     course = Course.objects.get(slug__iexact=slug)
+    job_oppurtunities = JobOpportunities.objects.filter(course = course)
     description = Description.objects.filter(course=course).first()
     what_u_get = WhatYouGet.objects.filter(description=description)
     testimonials = Testimonial.objects.filter(course=course)
+    highlight = Highligth.objects.filter(course = course)
+    who_should_enroll = WhoShouldEnroll.objects.filter(course=course)
     faqs = FrequentlyAskedQuestion.objects.filter(course=course)
     if len(UserCourseMap.objects.filter(course=course, user=user))>0:
         enrolled = True
@@ -185,14 +189,17 @@ def course_description(request, slug):
             'length': len(lessons),
         }
         contents.append(content)
-
+    print(job_oppurtunities)
     data = {
+        'highlights':highlight,
         'course': course,
         'enrolled': enrolled,
+        'job_oppurtunities':job_oppurtunities,
         'description': description,
         'whatuget_points': what_u_get,
         'contents': contents,
         'testimonials': testimonials,
+        'who_should_enroll':who_should_enroll,
         'faqs': faqs
     }
 
